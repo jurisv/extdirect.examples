@@ -1,0 +1,1 @@
+## Sample application that shows different scenarios when connecting your ExtJs 4.2+ application to backend via Ext.Direct
