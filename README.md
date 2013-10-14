@@ -1,4 +1,4 @@
-Code examples
+####Code examples
 ========
 
 This repository contains example applications in ExtJs/Sencha Touch/node.js .
