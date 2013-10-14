@@ -1,4 +1,4 @@
-##Sample node.js server implementation for Ext.Direct
+####Sample node.js server implementation for Ext.Direct
 
 To start launch server from commandline : node server.js
 
