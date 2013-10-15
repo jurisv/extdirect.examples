@@ -1,13 +1,13 @@
 {
-    "name": "default-ext-direct-port-3000",
+    "name": "default-ext-direct-mysql-port-3000",
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "start": "node app"
+        "start": "node server"
     },
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/jurisv/code-examples/tree/master/node-server/extdirect-mysql"
     },
     "dependencies": {
         "express": "3.1.0",
