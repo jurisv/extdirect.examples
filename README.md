@@ -12,6 +12,7 @@ Sencha Cmd v4.0.0.203 must be installed on development machine.
 
 To run any examples contained within workspace:
 from commandline(must be in extjs4-nodejs-extdirect or touch23-nodejs-extdirect folder depending on which project are you building):
+
     * 'sencha app refresh'
     * 'sencha app build'
 
