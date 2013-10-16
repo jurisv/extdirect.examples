@@ -6,4 +6,4 @@
 
   * Form file upload from Album(most devices)/ Camera via File API (iOS devices only)
 
-  * List CRUD operations
+  * List read using directFn

@@ -21,9 +21,12 @@ Please note that node.js server must be run at the same time, otherwise you will
 
 Currently finished and available examples - others may work, but are not finished unless listed here:
 ExtJs:
+
     * Application structure with API provider
     * Grid CRUD Master-detail
 
 Sencha Touch:
+
     * Application structure with API provider
+    * List read using directFn
 
