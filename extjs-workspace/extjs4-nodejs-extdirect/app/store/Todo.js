@@ -7,7 +7,7 @@ Ext.define('DirectDemo.store.Todo', {
 
     autoLoad: false,
 
-    pageSize: 2,
+    pageSize: 5,
 
     //autoSync: true, // if operating on model directly this will make double POSTs!
 

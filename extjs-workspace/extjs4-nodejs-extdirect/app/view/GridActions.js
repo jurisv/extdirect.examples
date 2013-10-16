@@ -28,6 +28,7 @@ Ext.define('DirectDemo.view.GridActions',{
                 items:[
                     {
                         text:'Click to Load data',
+                        icon:'resources/assets/arrow-circle-double-135.png',
                         action:'loadStore'
                     }
                 ]
@@ -60,7 +61,7 @@ Ext.define('DirectDemo.view.GridActions',{
                     xtype:'actioncolumn',
                     width:20,
                     items: [{
-                        icon: '../shared/images/information.png',
+                        icon: 'resources/assets/information.png',
                         tooltip: 'Click for more info',
                         handler: function(grid, rowIndex, colIndex) {
                             var rec = grid.getStore().getAt(rowIndex);
@@ -88,6 +89,8 @@ Ext.define('DirectDemo.view.GridActions',{
                 {
                     xtype: 'textfield',
                     anchor: '100%',
+                    allowBlank: false,
+                    msgTarget:'side',
                     fieldLabel: 'Text',
                     name: 'text'
                 },
@@ -104,17 +107,17 @@ Ext.define('DirectDemo.view.GridActions',{
                 {
                     xtype: 'button',
                     action: 'insertRecord',
-                    icon:'../shared/images/plus-circle.png',
-                    text: 'Insert new'
+                    icon:'resources/assets/plus-circle.png',
+                    text: 'Insert blank record'
                 },{
                     xtype: 'button',
                     action: 'updateRecord',
-                    icon:'../shared/images/pencil.png',
+                    icon:'resources/assets/pencil.png',
                     text: 'Update'
                 },{
                     xtype: 'button',
                     action: 'removeRecord',
-                    icon:'../shared/images/minus-circle.png',
+                    icon:'resources/assets/minus-circle.png',
                     text: 'Remove selected'
                 },'->'
             ]

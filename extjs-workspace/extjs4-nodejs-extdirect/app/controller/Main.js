@@ -18,22 +18,21 @@ Ext.define('DirectDemo.controller.Main', {
                 itemclick: this.onTodoGridItemClick
             },
 
-            'jgridactions button[action=insertRecord]': {
-                click: this.onInsertBtnClick
-            },
-
-            'jgridactions button[action=updateRecord]': {
-                click: this.onUpdateBtnClick
-            },
-
-            'jgridactions button[action=removeRecord]': {
-                click: this.onRemoveBtnClick
-            },
-
-            'jgridactions button[action=loadStore]':{
-                click: this.laodStore
+            'jgridactions button': {
+                click: this.buttonActions
             }
         });
+    },
+
+    //improves excessive query overhead
+    buttonActions: function(button, e, eOpts){
+        switch(button.action){
+            case 'insertRecord': this.onInsertBtnClick(); break;
+            case 'updateRecord': this.onUpdateBtnClick(); break;
+            case 'removeRecord': this.onRemoveBtnClick(); break;
+            case 'loadStore': this.laodStore(); break;
+            default: break;
+        }
     },
 
     laodStore:function(){
@@ -44,19 +43,54 @@ Ext.define('DirectDemo.controller.Main', {
         this.getEditor().loadRecord(record);
     },
 
-    onInsertBtnClick: function(button, e, eOpts) {
-//TODO: implement
+    onInsertBtnClick: function() {
+        var record = Ext.create('DirectDemo.model.TodoItem', {text:'New todo action', complete:0});
+        record.save({
+            callback:function(records, operation, success){
+                //we add to store only after successful insertion at the server-side
+                if(success){
+                    Ext.getStore('Todo').add(records);
+                }else{
+                    console.log('Failure to add record: ', arguments);
+                }
+            }
+        });
     },
 
-    onRemoveBtnClick: function(button, e, eOpts) {
-//TODO: implement
+    onRemoveBtnClick: function() {
+        if(this.missingSelection()){
+            Ext.Msg.alert('Error', 'Please select record to remove');
+        }else{
+            var form = this.getEditor().getForm(),
+                record = form.getRecord(),
+                store = Ext.getStore('Todo');
+            this.getTodoGrid().getSelectionModel().deselect(record);
+
+            store.remove(record);
+
+            record.destroy({
+                callback:function(records, operation){
+                    var success = operation.wasSuccessful();
+
+                    if(success){
+                        form.reset();
+                        console.log('Sucessfully removed record: ', arguments);
+                    }else{
+                        store.insert(record.index, record);
+                        console.log('Failure to remove record: ', arguments);
+                        Ext.Msg.alert('Server side Error', 'Unable to remove the record');
+                    }
+                }
+            });
+        }
     },
 
-    onUpdateBtnClick: function(button, e, eOpts) {
+    onUpdateBtnClick: function() {
         //prevent errors if no records selected
-        if(this.getTodoGrid().getSelectionModel().getSelection().length===0){
+        if(this.missingSelection()){
             return false;
         }
+
         var form = this.getEditor().getForm();
 
         if (form.isValid()) {
@@ -65,8 +99,6 @@ Ext.define('DirectDemo.controller.Main', {
 
             record.save({
                 success: function(record, operation) {
-                    //var id = record.getId(),
-                    //  store = record.store;
                     record.commit(); // ##Juris :: Commit record in the store
                     console.log('success', record, operation);
                     // update form from computed remote record
@@ -79,9 +111,10 @@ Ext.define('DirectDemo.controller.Main', {
                 },
                 scope: this
             });
-        } else {
-            //me.formShowValidationErrors(form);
         }
-    }
+    },
 
+    missingSelection: function(){
+        return this.getTodoGrid().getSelectionModel().getSelection().length === 0;
+    }
 });

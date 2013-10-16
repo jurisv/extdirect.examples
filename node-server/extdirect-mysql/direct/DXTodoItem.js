@@ -6,11 +6,15 @@ var DXTodoItem  = {
         var conn = mysql.connect();
         delete params['id'];
         conn.query('INSERT INTO ' + table + ' SET ?', params, function(err, result) {
-            mysql.disconnect(conn); //release connection
+
             if (err) throw err;
 
             conn.query('SELECT * FROM '  + table + ' WHERE id = ?', result.insertId, function(err, rows, fields) {
-                callback(rows);
+                mysql.disconnect(conn); //release connection
+                callback({
+                    success: true,
+                    data: rows[0]
+                });
             });
         });
     },
@@ -64,8 +68,12 @@ var DXTodoItem  = {
 
         conn.query('DELETE FROM ' + table + ' WHERE id = ?', conn.escape(params['id']), function(err, rows, fields) {
             if (err) throw err;
+
             mysql.disconnect(conn); //release connection
-            callback({success:true, id:params['id']});
+            callback({
+                success:rows.affectedRows === 1, //if row successfully removed, affected row will be equal to 1
+                id:params['id']
+            });
         });
     }
 };
