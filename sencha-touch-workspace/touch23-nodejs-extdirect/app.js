@@ -10,6 +10,16 @@
     will need to resolve manually.
 */
 
+// For Ext.Direct support
+Ext.require([
+    'Ext.direct.*'
+]);
+
+Ext.onReady(function(){
+    Ext.direct.Manager.addProvider(ExtRemote.REMOTING_API); //Must match namespace and apiName defined in node.js server
+});
+//-------
+
 Ext.application({
     name: 'DirectDemo',
 
@@ -19,6 +29,14 @@ Ext.application({
 
     views: [
         'Main'
+    ],
+
+    models: [
+        'TodoItem'
+    ],
+
+    stores: [
+        'Todo'
     ],
 
     icon: {

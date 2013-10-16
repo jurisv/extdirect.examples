@@ -19,6 +19,8 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "../touch/src/device/sqlite/Sencha.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
+  "DirectDemo.model.TodoItem": [],
+  "DirectDemo.store.Todo": [],
   "DirectDemo.view.Main": [],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
@@ -643,6 +645,8 @@ Ext.ClassManager.addNameAlternateMappings({
   ]
 });
 Ext.ClassManager.addNameAliasMappings({
+  "DirectDemo.model.TodoItem": [],
+  "DirectDemo.store.Todo": [],
   "DirectDemo.view.Main": [
     "widget.main"
   ],
