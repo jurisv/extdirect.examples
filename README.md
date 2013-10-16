@@ -19,7 +19,8 @@ Point your webserver to workspace folder.
 Please note that node.js server must be run at the same time, otherwise you will end up receiving 404 errors.
 
 
-Currently finished and available examples - others may work, but are not finished unless listed here:
+Currently finished and available examples - others may work, but are not finished unless listed below.
+
 ExtJs:
 
     * Application structure with API provider
