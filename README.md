@@ -5,7 +5,7 @@ Please navigate down to source tree, to find the one you are interested.
 
 Prerequisites after checking out:
 
-    * node.js servers require to run 'npm install' to retrieve dependent modules. Then run via 'node server.js'
+node.js servers require to run 'npm install' to retrieve dependent modules. Then run via 'node server.js'
 
 ExtJs/touch workspaces are self contained. It means that they are created using Sencha CMD , and contain all source files for framework.
 Sencha Cmd v4.0.0.203 must be installed on development machine.
