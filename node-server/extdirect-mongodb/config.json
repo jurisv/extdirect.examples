@@ -1,0 +1,38 @@
+{
+    "ServerConfig": {
+        "port": 3000,
+        "logger": "dev",
+        "enableUpload": true,
+        "enableCompression": true,
+        "webRoot": "/public",
+        "enableSessions": true,
+        "sessionSecret": "vdW3F6y3506h",
+        "enableCORS": true,
+        "allowedMethods": "GET,POST,OPTIONS"
+    },
+
+    "MySQLConfig": {
+        "hostname": "localhost",
+        "port": 3306,
+        "user": "script",
+        "password": "qwerty12",
+        "db": "extdirectnode"
+    },
+
+    "MongoDBConfig": {
+        "hostname": "localhost",
+        "port": 27017,
+        "db": "extdirectnode"
+    },
+
+    "ExtDirectConfig": {
+        "namespace": "ExtRemote",
+        "apiName": "REMOTING_API",
+        "apiPath": "/directapi",
+        "classPath": "/direct",
+        "classPrefix": "DX",
+        "server": "localhost",
+        "port": "3000",
+        "protocol": "http"
+    }
+}

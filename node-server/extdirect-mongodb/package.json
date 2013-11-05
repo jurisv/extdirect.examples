@@ -1,0 +1,20 @@
+{
+    "name": "default-ext-direct-mongodb-port-3000",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node server"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jurisv/code-examples/tree/master/node-server/extdirect-mongodb"
+    },
+    "dependencies": {
+        "express": "3.1.0",
+        "nconf": "~0.6.7",
+        "mysql": "~2.0.0",
+        "mongodb": "~1.3.19",
+        "extdirect": "~1.2.0",
+        "async": "~0.2.9"
+    }
+}
