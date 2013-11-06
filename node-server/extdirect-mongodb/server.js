@@ -2,7 +2,6 @@ var express = require('express'),
     nconf = require('nconf'),
     http = require('http'),
     path = require('path'),
-    mysql = require('mysql'),
     mongodb = require('mongodb'),
     extdirect = require('extdirect'),
     async = require('async');
@@ -10,7 +9,6 @@ var express = require('express'),
 nconf.env().file({ file: 'config.json'});
 
 var ServerConfig = nconf.get("ServerConfig"),
-    MySQLConfig = nconf.get("MySQLConfig"),
     MongoDBConfig = nconf.get("MongoDBConfig"),
     ExtDirectConfig = nconf.get("ExtDirectConfig");
 
@@ -20,32 +18,6 @@ if(ServerConfig.enableSessions){
     //memory store for sessions - change to different storage here to match your implementation.
     var store  = new express.session.MemoryStore;
 }
-
-global.mySQL = {
-    connect : function(){
-        var conn = mysql.createConnection({
-            host: MySQLConfig.hostname,
-            port: MySQLConfig.port,
-            user: MySQLConfig.user,
-            password: MySQLConfig.password,
-            database: MySQLConfig.db
-        });
-
-        conn.connect(function(err) {
-            if(err){
-                console.error('Connection had errors: ', err.code);
-                console.error('Connection params: ', MySQLConfig.hostname,MySQLConfig.user, MySQLConfig.db );
-                process.exit(1);
-            }
-        });
-
-        return conn;
-    },
-
-    disconnect : function(conn){
-        conn.end();
-    }
-};
 
 var mongoClient =
         new mongodb.MongoClient(
