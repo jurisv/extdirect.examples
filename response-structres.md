@@ -1,23 +1,42 @@
-This document summarizes all serverside responses that are expected by client.
+####This document summarizes all standard serverside responses that are expected by client.
 
 
-Extjs 4.2+
-==
-
-Grid Widget
---
-
-Form
---
+###Extjs 4.2+
 
 
+####Grid Widget
 
-Sencha Touch 2.3+
-==
+```json
+{
 
-List
---
+}
+```
 
 
-Form
---
+####Form
+
+```json
+{
+
+}
+```
+-
+
+
+###Sencha Touch 2.3+
+
+####List
+```json
+{
+
+}
+```
+
+
+####Form
+
+```json
+{
+
+}
+```
