@@ -49,6 +49,7 @@ ExtJs:
 
     * Application structure with API provider
     * Grid CRUD Master-detail
+    * Cookie / Session
 
 Sencha Touch:
 

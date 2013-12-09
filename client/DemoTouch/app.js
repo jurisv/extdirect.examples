@@ -31,6 +31,14 @@ Ext.application({
         'Main'
     ],
 
+    models: [
+        'TodoItem'
+    ],
+
+    stores: [
+        'Todo'
+    ],
+
     icon: {
         '57': 'resources/icons/Icon.png',
         '72': 'resources/icons/Icon~ipad.png',
