@@ -50,6 +50,7 @@ ExtJs:
     * Application structure with API provider
     * Grid CRUD Master-detail
     * Cookie / Session
+    * Direct method call, shows regular call and onw that has hard exception (syntax error)
 
 Sencha Touch:
 

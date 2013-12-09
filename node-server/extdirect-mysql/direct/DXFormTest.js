@@ -7,6 +7,14 @@ var DXFormTest = {
         });
     },
 
+    testException: function(params, callback){
+        failedHere; // explicit typo
+        callback({
+            success:true
+        });
+    },
+
+
     load: function(params, callback){
         callback({
             success:true,
