@@ -55,3 +55,5 @@ Sencha Touch:
 
     * Application structure with API provider
     * List read using directFn
+
+###Coming soon: Architect 3 sample project using CRUD and form binding
