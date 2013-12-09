@@ -1,4 +1,4 @@
-Ext.define('DirectDemo.model.TodoItem', {
+Ext.define('DemoExtJs.model.TodoItem', {
     extend: 'Ext.data.Model',
 
     fields: [

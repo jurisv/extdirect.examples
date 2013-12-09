@@ -1,4 +1,4 @@
-Ext.define('DirectDemo.view.MethodCall',{
+Ext.define('DemoExtJs.view.MethodCall',{
     extend:'Ext.panel.Panel',
 
     xtype:'jmethodcall',

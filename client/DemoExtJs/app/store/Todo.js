@@ -1,8 +1,8 @@
-Ext.define('DirectDemo.store.Todo', {
+Ext.define('DemoExtJs.store.Todo', {
     extend: 'Ext.data.Store',
 
     requires: [
-        'DirectDemo.model.TodoItem'
+        'DemoExtJs.model.TodoItem'
     ],
 
     autoLoad: false,
@@ -11,7 +11,7 @@ Ext.define('DirectDemo.store.Todo', {
 
     //autoSync: true, // if operating on model directly this will make double POSTs!
 
-    model: 'DirectDemo.model.TodoItem',
+    model: 'DemoExtJs.model.TodoItem',
 
     storeId: 'Todo' // If store Id matches it's class name, may be skipped.
 });

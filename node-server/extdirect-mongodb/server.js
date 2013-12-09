@@ -23,7 +23,7 @@ var mongoClient =
         new mongodb.MongoClient(
                 new mongodb.Server(
                         MongoDBConfig.hostname || 'localhost',
-                        MongoDBConfig.port || MongoDbConnection.DEFAULT_PORT,
+                        MongoDBConfig.port || mongodb.Connection.DEFAULT_PORT,
                         { auto_reconnect: true }),
                 { w: 1 });
 

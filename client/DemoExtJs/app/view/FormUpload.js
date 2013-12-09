@@ -1,4 +1,4 @@
-Ext.define('DirectDemo.view.FormUpload',{
+Ext.define('DemoExtJs.view.FormUpload',{
     extend:'Ext.form.Panel',
 
     xtype:'jformaupload',

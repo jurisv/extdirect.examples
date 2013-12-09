@@ -2,7 +2,6 @@
 We are doing major overhaul of examples, so they might be broken!
 Please don't report any issues while this message is here.
 
-
 -
 
 ###Code examples
@@ -21,7 +20,7 @@ node.js servers require to run 'npm install' to retrieve dependent modules. Then
 Important: Sample project you are downloading does not have framework!
 You have to download it and place inside sample folders.
 
-For ExtJs it will be:  client/DemoExtJs/ext (Expects version 4.2.1 +)
+For ExtJs it will be:  client/DemoExtJs/ext (Expects version 4.2.1.883 +)
 
 For Sencha Touch :  client/DemoTouch/touch (Expects version 2.3.1+)
 

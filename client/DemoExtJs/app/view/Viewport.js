@@ -1,4 +1,4 @@
-Ext.define('DirectDemo.view.Viewport', {
+Ext.define('DemoExtJs.view.Viewport', {
     extend: 'Ext.container.Viewport',
     requires:[
         'Ext.tab.Panel',

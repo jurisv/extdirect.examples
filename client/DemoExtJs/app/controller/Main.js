@@ -1,4 +1,4 @@
-Ext.define('DirectDemo.controller.Main', {
+Ext.define('DemoExtJs.controller.Main', {
     extend: 'Ext.app.Controller',
 
     refs: [
@@ -44,7 +44,7 @@ Ext.define('DirectDemo.controller.Main', {
     },
 
     onInsertBtnClick: function() {
-        var record = Ext.create('DirectDemo.model.TodoItem', {text:'New todo action', complete:0});
+        var record = Ext.create('DemoExtJs.model.TodoItem', {text:'New todo action', complete:0});
         record.save({
             callback:function(records, operation, success){
                 //we add to store only after successful insertion at the server-side

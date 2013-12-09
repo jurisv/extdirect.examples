@@ -1,4 +1,4 @@
-Ext.define('DirectDemo.view.FormActions',{
+Ext.define('DemoExtJs.view.FormActions',{
     extend:'Ext.form.Panel',
 
     xtype:'jformactions',

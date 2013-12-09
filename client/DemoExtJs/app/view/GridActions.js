@@ -1,4 +1,4 @@
-Ext.define('DirectDemo.view.GridActions',{
+Ext.define('DemoExtJs.view.GridActions',{
     extend:'Ext.container.Container',
 
     xtype:'jgridactions',
