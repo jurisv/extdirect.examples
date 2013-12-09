@@ -25,6 +25,7 @@
         "classPrefix": "DX",
         "server": "localhost",
         "port": "3000",
-        "protocol": "http"
+        "protocol": "http",
+        "appendRequestResponseObjects": true
     }
 }

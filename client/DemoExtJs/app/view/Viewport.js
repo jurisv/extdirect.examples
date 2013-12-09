@@ -27,6 +27,9 @@ Ext.define('DemoExtJs.view.Viewport', {
             },
             {
                 xtype:'tree-actions'
+            },
+            {
+                xtype:'demo-cookies'
             }
         ]
     }]

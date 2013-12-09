@@ -26,7 +26,8 @@ var DXFormTest = {
 
     },
 
-    filesubmit: function(params, files, callback/*formHandler*/){
+    filesubmit: function(params, callback, sessionID, request, response/*formHandler*/){
+        var files = request.files; //get files from request object
         // console.log(params, files)
 
         // Do something with uploaded file, e.g. move to another location

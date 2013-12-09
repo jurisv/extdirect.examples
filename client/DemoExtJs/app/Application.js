@@ -8,7 +8,8 @@ Ext.define('DemoExtJs.Application', {
         'FormActions',
         'GridActions',
         'FormUpload',
-        'TreeActions'
+        'TreeActions',
+        'Cookies'
     ],
 
     controllers: [
