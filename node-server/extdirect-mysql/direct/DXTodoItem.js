@@ -23,22 +23,31 @@ var DXTodoItem  = {
     read: function(params, callback){
         var conn = db.connect();
 
-        var sql = 'SELECT * from ' + table;
+        var sql = 'SELECT * FROM ' + table,
+            where = '';
+
+        //filtering. this example assumes filtering on 1 field, as multiple field where clause requires additional info e.g. chain operator
+
+        if(params.filter){
+            where = " WHERE `"+ params.filter[0].property  + "` LIKE '%" + params.filter[0].value + "%'"; // set your business logic here to perform advanced where clause
+            sql += where;
+        }
+
         // this sample implementation supports 1 sorter, to have more than one, you have to loop and alter query
         if(params.sort){
             var s = params.sort[0];
-            sql = sql + ' order by ' + conn.escape(s.property) +  ' ' + conn.escape(s.direction);
+            sql = sql + ' ORDER BY ' + conn.escape(s.property) +  ' ' + conn.escape(s.direction);
         }
 
         // Paging
-        sql = sql + ' limit ' + conn.escape(params.start) + ' , ' + conn.escape(params.limit);
+        sql = sql + ' LIMIT ' + conn.escape(params.start) + ' , ' + conn.escape(params.limit);
 
         conn.query(sql, function(err, rows, fields) {
             if (err) throw err;
 
             //get totals for paging
 
-            var totalQuery = 'SELECT count(*) as totals from ' + table;
+            var totalQuery = 'SELECT count(*) as totals from ' + table + where;
 
             conn.query(totalQuery, function(err, rowsTotal, fields) {
                 db.disconnect(conn); //release connection

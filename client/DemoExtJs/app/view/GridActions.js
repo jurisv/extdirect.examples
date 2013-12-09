@@ -30,6 +30,18 @@ Ext.define('DemoExtJs.view.GridActions',{
                         text:'Click to Reload data',
                         icon:'resources/assets/arrow-circle-double-135.png',
                         action:'loadStore'
+                    },'->',{
+                        xtype:'trigger',
+                        triggerCls: 'x-form-clear-trigger',
+                        emptyText:'Filter',
+                        onTriggerClick: function(trigger) {
+                            this.reset();
+                            this.fireEvent('filter-reset', trigger);
+                        }
+                    },{
+                        xtype:'button',
+                        action:'filterStore',
+                        text:'Filter'
                     }
                 ]
             },{

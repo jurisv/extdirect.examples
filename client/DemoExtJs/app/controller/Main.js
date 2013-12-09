@@ -18,8 +18,15 @@ Ext.define('DemoExtJs.controller.Main', {
                 itemclick: this.onTodoGridItemClick
             },
 
-            'grid-actions button': {
+            'grid-actions button': { //listening for all buttons on grid-actions here, then narrow down to particular button inside actual method
                 click: this.buttonActions
+            },
+
+            'grid-actions #todoGrid toolbar trigger': {
+                'filter-reset': function(){ //not the best practice, please avoid if possible! this only shows that you can use dashes for event names.
+                    //we can define logic also here
+                    Ext.getStore('Todo').clearFilter();
+                }
             }
         });
     },
@@ -31,12 +38,24 @@ Ext.define('DemoExtJs.controller.Main', {
             case 'updateRecord': this.onUpdateBtnClick(); break;
             case 'removeRecord': this.onRemoveBtnClick(); break;
             case 'loadStore': this.laodStore(); break;
+            case 'filterStore': this.filterStore(); break;
             default: break;
         }
     },
 
     laodStore:function(){
         this.getTodoGrid().getStore().reload();
+    },
+
+    filterStore: function(){
+        var field = Ext.ComponentQuery.query('grid-actions #todoGrid toolbar trigger')[0],
+            value = field.getValue(),
+            store = Ext.getStore('Todo');
+
+        if(value){
+            store.clearFilter(true);
+            store.filter('text', value);  // filter on 'text' field
+        }
     },
 
     onTodoGridItemClick: function(dataview, record, item, index, e, eOpts) {

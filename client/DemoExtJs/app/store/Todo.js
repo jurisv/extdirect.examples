@@ -7,6 +7,8 @@ Ext.define('DemoExtJs.store.Todo', {
 
     autoLoad: true,
 
+    remoteFilter:true, //enable remote sorting
+
     pageSize: 5,
 
     //autoSync: true, // if operating on model directly this will make double POSTs!
