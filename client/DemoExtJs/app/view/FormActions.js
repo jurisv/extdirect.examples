@@ -1,7 +1,7 @@
 Ext.define('DemoExtJs.view.FormActions',{
     extend:'Ext.form.Panel',
 
-    xtype:'jformactions',
+    xtype:'form-actions',
 
     title:'Form Actions'
 

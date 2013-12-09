@@ -1,14 +1,20 @@
+//Set up common namespace for the application
+//As this is the global namespace, it will be available across all modules
+if(!global['App']){
+    global.App = {};
+}
+
 var express = require('express'),
     nconf = require('nconf'),
     http = require('http'),
     path = require('path'),
-    mysql = require('mysql'),
-    extdirect = require('extdirect');
 
-nconf.env().file({ file: 'config.json'});
+    extdirect = require('extdirect'),
+    db = require('./server-db');
+
+nconf.env().file({ file: 'server-config.json'});
 
 var ServerConfig = nconf.get("ServerConfig"),
-    MySQLConfig = nconf.get("MySQLConfig"),
     ExtDirectConfig = nconf.get("ExtDirectConfig");
 
 var app = express();
@@ -18,42 +24,13 @@ if(ServerConfig.enableSessions){
     var store  = new express.session.MemoryStore;
 }
 
-var mySQL = {
-    connect : function(){
-        var conn = mysql.createConnection({
-            host: MySQLConfig.hostname,
-            port: MySQLConfig.port,
-            user: MySQLConfig.user,
-            password: MySQLConfig.password,
-            database: MySQLConfig.db
-        });
-
-        conn.connect(function(err) {
-            if(err){
-                console.error('Connection had errors: ', err.code);
-                console.error('Connection params: ', MySQLConfig.hostname,MySQLConfig.user, MySQLConfig.db );
-                process.exit(1);
-            }
-        });
-
-        return conn;
-    },
-
-    disconnect : function(conn){
-        conn.end();
-    }
-};
-
-// Make MySql connections available globally, so we can access them from within modules
-global['mySQL'] =  mySQL;
-
 app.configure(function(){
 
     app.set('port', process.env.PORT || ServerConfig.port);
     app.use(express.logger(ServerConfig.logger));
 
     if(ServerConfig.enableUpload){
-        app.use(express.bodyParser({uploadDir:'./uploads'})); //take care of body parsing/multipart/files
+        app.use(express.bodyParser({uploadDir:ServerConfig.fileUploadFolder})); //take care of body parsing/multipart/files
     }
 
     app.use(express.methodOverride());
@@ -71,17 +48,22 @@ app.configure(function(){
     app.use(express.static(path.join(__dirname, ServerConfig.webRoot)));
 });
 
-//Important to get CORS headers and cross domain functionality
+//CORS Supports
 if(ServerConfig.enableCORS){
-    app.all('*', function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-    });
 
-    app.options(ExtDirectConfig.classPath, function(request, response) {
-        response.writeHead(200, {'Allow': ServerConfig.allowedMethods});
-        response.end();
+    app.use( function(req, res, next) {
+        res.header('Access-Control-Allow-Origin', ServerConfig.AccessControlAllowOrigin); // allowed hosts
+        res.header('Access-Control-Allow-Methods', ServerConfig.AccessControlAllowMethods); // what methods should be allowed
+        res.header('Access-Control-Allow-Headers', ServerConfig.AccessControlAllowHeaders); //specify headers
+        res.header('Access-Control-Allow-Credentials', ServerConfig.AccessControlAllowCredentials); //include cookies as part of the request if set to true
+        res.header('Access-Control-Max-Age', ServerConfig.AccessControlMaxAge); //prevents from requesting OPTIONS with every server-side call (value in minutes)
+
+        if (req.method === 'OPTIONS') {
+            res.send(204);
+        }
+        else {
+            next();
+        }
     });
 }
 

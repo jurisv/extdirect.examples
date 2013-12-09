@@ -1,7 +1,7 @@
 Ext.define('DemoExtJs.view.GridActions',{
     extend:'Ext.container.Container',
 
-    xtype:'jgridactions',
+    xtype:'grid-actions',
 
     requires: [
         'Ext.grid.Panel',
@@ -27,7 +27,7 @@ Ext.define('DemoExtJs.view.GridActions',{
                 dock:'top',
                 items:[
                     {
-                        text:'Click to Load data',
+                        text:'Click to Reload data',
                         icon:'resources/assets/arrow-circle-double-135.png',
                         action:'loadStore'
                     }

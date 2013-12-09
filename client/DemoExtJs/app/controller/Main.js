@@ -4,21 +4,21 @@ Ext.define('DemoExtJs.controller.Main', {
     refs: [
         {
             ref: 'editor',
-            selector: 'jgridactions #todoForm'
+            selector: 'grid-actions #todoForm'
         },
         {
             ref:'todoGrid',
-            selector:'jgridactions #todoGrid'
+            selector:'grid-actions #todoGrid'
         }
     ],
 
     init: function(application) {
         this.control({
-            "jgridactions #todoGrid": {
+            "grid-actions #todoGrid": {
                 itemclick: this.onTodoGridItemClick
             },
 
-            'jgridactions button': {
+            'grid-actions button': {
                 click: this.buttonActions
             }
         });
@@ -36,7 +36,7 @@ Ext.define('DemoExtJs.controller.Main', {
     },
 
     laodStore:function(){
-        this.getTodoGrid().getStore().load();
+        this.getTodoGrid().getStore().reload();
     },
 
     onTodoGridItemClick: function(dataview, record, item, index, e, eOpts) {

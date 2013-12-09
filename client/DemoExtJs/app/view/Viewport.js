@@ -14,16 +14,19 @@ Ext.define('DemoExtJs.view.Viewport', {
         xtype: 'tabpanel',
         items:[
             {
-                xtype:'jgridactions'
+                xtype:'grid-actions'
             },
             {
-                xtype:'jmethodcall'
+                xtype:'method-call'
             },
             {
-                xtype:'jformactions'
+                xtype:'form-actions'
             },
             {
-                xtype:'jformaupload'
+                xtype:'form-upload'
+            },
+            {
+                xtype:'tree-actions'
             }
         ]
     }]

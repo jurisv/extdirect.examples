@@ -5,18 +5,15 @@
         "enableUpload": true,
         "enableCompression": true,
         "webRoot": "/public",
+        "fileUploadFolder": "./uploads",
         "enableSessions": true,
         "sessionSecret": "vdW3F6y3506h",
         "enableCORS": true,
-        "allowedMethods": "GET,POST,OPTIONS"
-    },
-
-    "MySQLConfig": {
-        "hostname": "localhost",
-        "port": 3306,
-        "user": "script",
-        "password": "qwerty12",
-        "db": "extdirectnode"
+        "AccessControlAllowOrigin": "*",
+        "AccessControlAllowMethods": "GET,PUT,POST,DELETE,OPTIONS",
+        "AccessControlAllowHeaders": "Origin, X-Requested-With, Content-Type, Accept",
+        "AccessControlAllowCredentials": true,
+        "AccessControlMaxAge": 3600
     },
 
     "ExtDirectConfig": {

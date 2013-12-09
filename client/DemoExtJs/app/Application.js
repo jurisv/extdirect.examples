@@ -7,7 +7,8 @@ Ext.define('DemoExtJs.Application', {
         'MethodCall',
         'FormActions',
         'GridActions',
-        'FormUpload'
+        'FormUpload',
+        'TreeActions'
     ],
 
     controllers: [

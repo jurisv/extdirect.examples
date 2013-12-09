@@ -1,16 +1,16 @@
 var table = 'todoitem';
-var mysql = mySQL;
+var db = global.App.database;
 
 var DXTodoItem  = {
     create: function(params, callback){
-        var conn = mysql.connect();
+        var conn = db.connect();
         delete params['id'];
         conn.query('INSERT INTO ' + table + ' SET ?', params, function(err, result) {
 
             if (err) throw err;
 
             conn.query('SELECT * FROM '  + table + ' WHERE id = ?', result.insertId, function(err, rows, fields) {
-                mysql.disconnect(conn); //release connection
+                db.disconnect(conn); //release connection
                 callback({
                     success: true,
                     data: rows[0]
@@ -21,7 +21,7 @@ var DXTodoItem  = {
 
     //callback as last argument is mandatory
     read: function(params, callback){
-        var conn = mysql.connect();
+        var conn = db.connect();
 
         var sql = 'SELECT * from ' + table;
         // this sample implementation supports 1 sorter, to have more than one, you have to loop and alter query
@@ -41,7 +41,7 @@ var DXTodoItem  = {
             var totalQuery = 'SELECT count(*) as totals from ' + table;
 
             conn.query(totalQuery, function(err, rowsTotal, fields) {
-                mysql.disconnect(conn); //release connection
+                db.disconnect(conn); //release connection
                 if (err) throw err;
 
                 callback({
@@ -54,22 +54,22 @@ var DXTodoItem  = {
     },
 
     update: function(params, callback){
-        var conn = mysql.connect();
+        var conn = db.connect();
 
         conn.query('UPDATE ' + table + ' SET ? where id = ' + conn.escape(params['id']), params, function(err, result) {
-            mysql.disconnect(conn); //release connection
+            db.disconnect(conn); //release connection
             if (err) throw err;
             callback({success:true});
         });
     },
 
     destroy: function(params, callback){
-        var conn = mysql.connect();
+        var conn = db.connect();
 
         conn.query('DELETE FROM ' + table + ' WHERE id = ?', conn.escape(params['id']), function(err, rows, fields) {
             if (err) throw err;
 
-            mysql.disconnect(conn); //release connection
+            db.disconnect(conn); //release connection
             callback({
                 success:rows.affectedRows === 1, //if row successfully removed, affected row will be equal to 1
                 id:params['id']

@@ -1,7 +1,7 @@
 Ext.define('DemoExtJs.view.MethodCall',{
     extend:'Ext.panel.Panel',
 
-    xtype:'jmethodcall',
+    xtype:'method-call',
 
     title:'Direct method call'
 

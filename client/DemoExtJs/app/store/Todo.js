@@ -5,7 +5,7 @@ Ext.define('DemoExtJs.store.Todo', {
         'DemoExtJs.model.TodoItem'
     ],
 
-    autoLoad: false,
+    autoLoad: true,
 
     pageSize: 5,
 
