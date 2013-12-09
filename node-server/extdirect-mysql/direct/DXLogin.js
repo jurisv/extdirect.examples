@@ -19,7 +19,7 @@ var DXLogin  = {
         /*
          You have full access to all request properties
          */
-        //console.log(request.cookie); //e.g. retrieve cookie
+        console.log(request.session); //e.g. retrieve session data
 
 
         response.header('My-Custom-Header ', '1234567890');
@@ -31,7 +31,8 @@ var DXLogin  = {
             message: 'Login successful',
             data: {
                 firstName: 'Juris',
-                lastName: 'Vecvanags'
+                lastName: 'Vecvanags',
+                cookie: request.session.cookie
             }
         });
     }

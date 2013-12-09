@@ -11,3 +11,5 @@
   * Full tree load
 
   * Tree single node dynamic load
+
+  * Cookie (Session data)
