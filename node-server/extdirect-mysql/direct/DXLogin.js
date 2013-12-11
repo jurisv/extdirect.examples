@@ -19,7 +19,7 @@ var DXLogin  = {
         /*
          You have full access to all request properties
          */
-        console.log(request.session); //e.g. retrieve session data
+        //console.log(request.session); //e.g. retrieve session data
 
 
         response.header('My-Custom-Header ', '1234567890');
