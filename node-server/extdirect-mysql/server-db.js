@@ -28,6 +28,25 @@ var mySQL = {
 
     disconnect : function(conn){
         conn.end();
+    },
+
+    debugError: function(fn, error){
+        // Generate SOFT error, instead of throwing hard error.
+        // We send messages with debug ingo only if in development mode
+
+        if(global.App.mode === 'development'){
+            fn({message: {
+                text: 'Database error',
+                debug: error
+            }
+            });
+        }else{
+            fn({message: {
+                text: 'Unknown error',
+                debug: null
+            }
+            });
+        }
     }
 };
 

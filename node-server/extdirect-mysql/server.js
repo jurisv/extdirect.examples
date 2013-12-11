@@ -91,10 +91,12 @@ app.post(ExtDirectConfig.classPath, function(request, response) {
 
 app.configure('development', function(){
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+    global.App.mode = 'development';
 });
 
 app.configure('production', function(){
     app.use(express.errorHandler());
+    global.App.mode = 'production';
 });
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -1,9 +1,17 @@
 Ext.define('DemoExtJs.view.MethodCall',{
-    extend:'Ext.panel.Panel',
+    extend:'Ext.form.Panel',
 
     xtype:'method-call',
 
-    title:'Direct method call',
+    title:'Direct method calls, exceptions',
+
+    tplWriteMode: 'append',
+
+    tpl: '<p>{data}</p>',
+
+    autoScroll: true,
+
+    bodyPadding: 5,
 
     dockedItems: [
         {
@@ -12,8 +20,9 @@ Ext.define('DemoExtJs.view.MethodCall',{
             items: [
                 {
                     xtype: 'button',
-                    text: 'Test connection',
+                    text: 'Test call, one parameter',
                     handler: function(bt){
+                        var me = bt.up('panel');
                         ExtRemote.DXFormTest.testMe({test:true},
                             function(result, event){
 
@@ -21,32 +30,77 @@ Ext.define('DemoExtJs.view.MethodCall',{
                                 var transaction = event.getTransaction(),
                                     status = event.status;
 
-                                Ext.Msg.alert('Response', Ext.encode(result));
+                                me.updateContent(Ext.encode(result));
+                            }
+                        );
+                    }
+                },
+                {
+                    xtype: 'button',
+                    text: 'Test call, empty parameter object',
+                    handler: function(bt){
+                        var me = bt.up('panel');
+                        ExtRemote.DXFormTest.testMe({},
+                            function(result, event){
+
+                                me.updateContent(Ext.encode(result));
 
                             }
                         );
-                    },
-                    scope:this
+                    }
                 },
-
-
                 {
                     xtype: 'button',
-                    text: 'Test exception',
+                    text: 'Read table page',
                     handler: function(bt){
+                        var me = bt.up('panel');
+                        ExtRemote.DXTodoItem.read({page:1, start:0,limit: 10},
+                            function(result, event){
+
+                                me.updateContent(Ext.encode(result));
+
+                            }
+                        );
+                    }
+                },
+                {
+                    xtype: 'button',
+                    text: 'Hard exception',
+                    handler: function(bt){
+                        var me = bt.up('panel');
                         ExtRemote.DXFormTest.testException({test:true},
                             function(result, event){
 
-                                Ext.Msg.alert('Response',event.message);
+                                me.updateContent(Ext.encode(event.message));
 
                             }
                         );
-                    },
-                    scope:this
+                    }
+                },
+                {
+                    xtype: 'button',
+                    text: 'Soft exception',
+                    handler: function(bt){
+                        var me = bt.up('panel');
+                        ExtRemote.DXTodoItem.read({},
+                            function(result, event){
+
+                                me.updateContent('No parameters specified for read operation, server returns soft error along debug info:<br> ' + Ext.encode(result));
+
+                            }
+                        );
+                    }
                 }
             ]
         }
-    ]
+    ],
 
+    updateContent: function(content){
+        var me = this;
+        me.update({
+            data: content
+        });
+        me.body.scroll('b', 100000, true);
+    }
 
 });

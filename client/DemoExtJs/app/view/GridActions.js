@@ -14,14 +14,13 @@ Ext.define('DemoExtJs.view.GridActions',{
 
     title: 'Grid CRUD operations',
     layout: 'border',
-
+    style:'padding:5px',
     items: [
         {
             xtype: 'gridpanel',
             region:'center',
             itemId: 'todoGrid',
             store: 'Todo',
-            border:false,
             dockedItems: [{
                 xtype:'toolbar',
                 dock:'top',
@@ -60,7 +59,7 @@ Ext.define('DemoExtJs.view.GridActions',{
                 },
                 {
                     xtype: 'gridcolumn',
-                    width: 300,
+                    flex:1,
                     dataIndex: 'text',
                     text: 'Text'
                 },
@@ -85,9 +84,9 @@ Ext.define('DemoExtJs.view.GridActions',{
         },
         {
             xtype: 'form',
-            region:'south',
+            region:'east',
             split:true,
-            height: 160,
+            width: 350,
             itemId: 'todoForm',
             bodyPadding: 10,
             title: 'Edit details',
@@ -114,25 +113,31 @@ Ext.define('DemoExtJs.view.GridActions',{
                     boxLabel: 'Yes'
                 }
             ],
+            dockedItems:[{
+                xtype:'toolbar',
+                height:29, //visual tweak, as paging toolbar is 1px taller...
+                dock: 'bottom',
+                items:[
+                    {
+                        xtype: 'button',
+                        action: 'insertRecord',
+                        icon:'resources/assets/plus-circle.png',
+                        text: 'Insert blank record'
+                    },{
+                        xtype: 'button',
+                        action: 'updateRecord',
+                        icon:'resources/assets/pencil.png',
+                        text: 'Update'
+                    },{
+                        xtype: 'button',
+                        action: 'removeRecord',
+                        icon:'resources/assets/minus-circle.png',
+                        text: 'Remove selected'
+                    },'->'
+                ]
 
-            fbar:[
-                {
-                    xtype: 'button',
-                    action: 'insertRecord',
-                    icon:'resources/assets/plus-circle.png',
-                    text: 'Insert blank record'
-                },{
-                    xtype: 'button',
-                    action: 'updateRecord',
-                    icon:'resources/assets/pencil.png',
-                    text: 'Update'
-                },{
-                    xtype: 'button',
-                    action: 'removeRecord',
-                    icon:'resources/assets/minus-circle.png',
-                    text: 'Remove selected'
-                },'->'
-            ]
+
+            }]
         }
     ]
 });

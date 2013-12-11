@@ -26,7 +26,7 @@ Ext.define('DemoExtJs.model.TodoItem', {
         reader: {
             type: 'json',
             root: 'data',
-            messageProperty:'message'
+            messageProperty:'message' // mandatory if you want the framework to set it's content
         }
     }
 });
