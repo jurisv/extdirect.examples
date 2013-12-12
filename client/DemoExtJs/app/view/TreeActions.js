@@ -1,11 +1,9 @@
 Ext.define('DemoExtJs.view.TreeActions',{
     extend:'Ext.tree.Panel',
 
-    //rootVisible: false,
-
-    height:300,
-
     store: 'Tree',
+
+    border:false,
 
     xtype:'tree-actions',
 

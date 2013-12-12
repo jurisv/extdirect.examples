@@ -24,7 +24,8 @@ Ext.application({
     name: 'DemoTouch',
 
     requires: [
-        'Ext.MessageBox'
+        'Ext.MessageBox',
+        'DemoTouch.overrides.form.Panel'
     ],
 
     views: [

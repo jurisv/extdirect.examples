@@ -51,11 +51,12 @@ ExtJs:
     * Form file upload (Cross domain upload is not supported!)
     * Tree root / child dynamic load
 
-Currently finished and available examples for Touch - others may work, but are not finished unless listed below.
-
 Sencha Touch:
 
     * Application structure with API provider
     * List read using directFn
+    * Form load / submit
+
+    Note: It contains an override for form load/submit. That fix will be provided as part of Sencha Touch 2.3.2
 
 ###Coming soon: Architect 3 sample project using CRUD and form binding

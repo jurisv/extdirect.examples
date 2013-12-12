@@ -19,6 +19,9 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
+  "DemoTouch.model.TodoItem": [],
+  "DemoTouch.overrides.form.Panel": [],
+  "DemoTouch.store.Todo": [],
   "DemoTouch.view.Main": [],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
@@ -641,6 +644,9 @@ Ext.ClassManager.addNameAlternateMappings({
   ]
 });
 Ext.ClassManager.addNameAliasMappings({
+  "DemoTouch.model.TodoItem": [],
+  "DemoTouch.overrides.form.Panel": [],
+  "DemoTouch.store.Todo": [],
   "DemoTouch.view.Main": [
     "widget.main"
   ],

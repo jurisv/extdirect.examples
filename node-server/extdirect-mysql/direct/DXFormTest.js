@@ -31,7 +31,6 @@ var DXFormTest = {
             success:true,
             params:params
         });
-
     },
 
     filesubmit: function(params, callback, sessionID, request, response/*formHandler*/){
