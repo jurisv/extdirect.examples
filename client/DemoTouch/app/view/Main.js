@@ -32,7 +32,7 @@ Ext.define('DemoTouch.view.Main', {
                 plugins: [
                     {
                         xclass: 'Ext.plugin.PullRefresh',
-                        pullText: 'Pull down for more new Items'
+                        pullText: 'Pull down to reload data'
                     }
                 ],
                 store:'Todo',
