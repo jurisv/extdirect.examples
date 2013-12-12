@@ -6,7 +6,6 @@ Please don't report any issues while this message is here.
 
 ###Code examples
 
-
 This repository contains example Ext.Direct applications in ExtJs and Sencha Touch for node.js
 Please navigate down to source tree to find the one you are interested.
 
@@ -42,9 +41,6 @@ Please note that node.js server must be run at the same time, otherwise you will
 
 ###Contents
 
-
-Currently finished and available examples - others may work, but are not finished unless listed below.
-
 ExtJs:
 
     * Application structure with API provider
@@ -53,6 +49,9 @@ ExtJs:
     * Direct method call, shows regular call and onw that has hard exception (syntax error)
     * Form Load / Submit
     * Form file upload (Cross domain upload is not supported!)
+    * Tree root / child dynamic load
+
+Currently finished and available examples for Touch - others may work, but are not finished unless listed below.
 
 Sencha Touch:
 

@@ -8,8 +8,6 @@
 
   * Form file upload
 
-  * Full tree load
-
-  * Tree single node dynamic load
+  * Tree root / child dynamic load
 
   * Cookie (Session data)

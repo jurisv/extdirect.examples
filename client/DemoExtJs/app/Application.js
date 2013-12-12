@@ -21,6 +21,7 @@ Ext.define('DemoExtJs.Application', {
     ],
 
     stores: [
-        'Todo'
+        'Todo',
+        'Tree'
     ]
 });
