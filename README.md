@@ -51,6 +51,8 @@ ExtJs:
     * Grid CRUD Master-detail
     * Cookie / Session
     * Direct method call, shows regular call and onw that has hard exception (syntax error)
+    * Form Load / Submit
+    * Form file upload (Cross domain upload is not supported!)
 
 Sencha Touch:
 
