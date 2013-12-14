@@ -1,42 +1,16 @@
 ####This document summarizes all standard serverside responses that are expected by client.
 
 
-###Extjs 4.2+
-
-
-####Grid Widget
+All responses are now unified and expect this format:
 
 ```json
 {
-
-}
-```
-
-
-####Form
-
-```json
-{
-
-}
-```
--
-
-
-###Sencha Touch 2.3+
-
-####List
-```json
-{
-
-}
-```
-
-
-####Form
-
-```json
-{
-
-}
+success:true,
+data:[
+    {
+    something: 'nice'
+    }
+]
+},
+total: 1
 ```
