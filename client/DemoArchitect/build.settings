@@ -1,6 +1,6 @@
 {
     "webBuild": {
-        "environment": "testing",
+        "environment": "production",
         "clean": "on",
         "publishPath": "/Users/juris/Desktop/ArchitectBuild"
     }
