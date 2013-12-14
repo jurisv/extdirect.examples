@@ -14,7 +14,7 @@ Ext.application({
     name: 'DemoTouch',
 
     requires: [
-        'DemoExtJs.DirectAPI',
+        'DemoTouch.DirectAPI',
         'Ext.MessageBox',
         'DemoTouch.overrides.form.Panel'
     ],

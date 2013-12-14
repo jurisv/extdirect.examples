@@ -1,4 +1,4 @@
-Ext.define('DemoExtJs.DirectAPI', {
+Ext.define('DemoTouch.DirectAPI', {
     /*
      Require Ext.Direct classes
      */
