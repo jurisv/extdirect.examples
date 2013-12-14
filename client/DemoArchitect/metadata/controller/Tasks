@@ -1,0 +1,298 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Tasks",
+        "stores": [
+            "Tasks"
+        ]
+    },
+    "designerId": "2856dba3-c512-4b02-8986-a3e844ab0885",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|controlQuery": "#gridPanel",
+                "designer|params": [
+                    "target",
+                    "record"
+                ],
+                "fn": "view",
+                "implHandler": [
+                    "\r",
+                    "var details = this.getDetailsPanel(),\t// Get detail panel via controller ref\r",
+                    "\ttoolbar = this.getDetailsToolbar();\t// Get detail panel toolbar via controller ref\r",
+                    "\r",
+                    "// Update the detail panel with the selected row's data\r",
+                    "details.update(record.data);\r",
+                    "\r",
+                    "// Show toolbar\r",
+                    "toolbar.show();\r",
+                    ""
+                ],
+                "name": "select",
+                "scope": "me"
+            },
+            "designerId": "df446b75-e4d7-445e-89e4-61f7a5aefeae"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|controlQuery": "#mainPanel #addButton",
+                "designer|params": [
+                    "target"
+                ],
+                "fn": "add",
+                "implHandler": [
+                    "var record = Ext.create('DemoArchitect.model.Task', {dueDate: new Date()}); //insert record with date",
+                    "record.save({",
+                    "    callback:function(records, operation, success){",
+                    "        //we add to store only after successful insertion at the server-side",
+                    "        if(success){",
+                    "            Ext.getStore('Tasks').add(records);",
+                    "",
+                    "            var formWindow = Ext.create('widget.taskform'),\t// Create new form window",
+                    "                form = formWindow.down('form').getForm();\t// Get form within window",
+                    "                //model = Ext.create('model.task');\t\t// Create new Task model",
+                    "",
+                    "// Associate model with form",
+                    "            form.loadRecord(record);",
+                    "",
+                    "// Show window",
+                    "            formWindow.show();",
+                    "",
+                    "        }else{",
+                    "            console.log('Failure to add record: ', arguments);",
+                    "        }",
+                    "    }",
+                    "});"
+                ],
+                "name": "click",
+                "scope": "me"
+            },
+            "designerId": "e36d723b-3313-48ef-ac07-dece1e00f055"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|controlQuery": "#detailsPanel #editButton",
+                "designer|params": [
+                    "target"
+                ],
+                "fn": "edit",
+                "implHandler": [
+                    "\r",
+                    "var data = target.up('panel').data,\t\t\t\t\t\t// Get panel's assosiated data\r",
+                    "\tstore = this.getTasksStore(),\t\t\t\t\t\t// Get Tasks store\r",
+                    "\ttask = store.getById(data.id),\t\t\t\t\t\t// Get current task\r",
+                    "    formWindow = Ext.create('widget.taskform'),\t\t\t// Create new form window\r",
+                    "\tform = formWindow.down('form').getForm();\t\t\t// Get form within window\r",
+                    "\r",
+                    "// Load task model into form\r",
+                    "form.loadRecord(task);\r",
+                    "\r",
+                    "// Show window\r",
+                    "formWindow.show();\r",
+                    ""
+                ],
+                "name": "click",
+                "scope": "me"
+            },
+            "designerId": "6c1bbf38-d9cb-47ea-9ac3-355220170579"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|controlQuery": "#recordForm #saveButton",
+                "designer|params": [
+                    "target"
+                ],
+                "fn": "save",
+                "implHandler": [
+                    "var form = target.up('form').getForm(),\t\t\t// Get parent form",
+                    "    formWindow = target.up('window'),\t\t\t// Get parent window",
+                    "    detailsPanel = this.getDetailsPanel(),\t\t// Get details panel",
+                    "    task = form.getRecord(),\t\t\t\t\t// Get task associated with form",
+                    "    store = this.getTasksStore();\t\t\t\t// Get Records store",
+                    "",
+                    "",
+                    "// Update associated task with form values",
+                    "var errors = form.updateRecord();",
+                    "",
+                    "// Valid",
+                    "if (form.isValid()) {",
+                    "",
+                    "    var record = form.getRecord();",
+                    "    form.updateRecord(record);",
+                    "",
+                    "    record.save({",
+                    "        success: function(record, operation) {",
+                    "            record.commit(); // ##Juris :: Commit record in the store",
+                    "            console.log('success', record, operation);",
+                    "            // update form from computed remote record",
+                    "            form.loadRecord(record);",
+                    "            // Update detail panel",
+                    "            detailsPanel.update(task.getData());",
+                    "            formWindow.destroy();",
+                    "        },",
+                    "        failure: function(record, operation) {",
+                    "            var exception = operation.getError();",
+                    "            if (exception && exception.errors) form.markInvalid(exception.errors);",
+                    "            console.log('failure', record, operation, exception);",
+                    "            formWindow.destroy();",
+                    "        },",
+                    "        scope: this",
+                    "    });",
+                    "}",
+                    "",
+                    "// Invalid",
+                    "else {",
+                    "",
+                    "    // Show errors on form",
+                    "    form.markInvalid(errors);",
+                    "",
+                    "}"
+                ],
+                "name": "click",
+                "scope": "me"
+            },
+            "designerId": "f27cbf84-7243-4479-90a4-df42d4f775ab"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|controlQuery": "#recordForm #cancelButton",
+                "designer|params": [
+                    "target"
+                ],
+                "fn": "cancelEdit",
+                "implHandler": [
+                    "",
+                    "// Get the window and close it",
+                    "var formWindow = target.up(\"window\");",
+                    "\tformWindow.destroy();",
+                    ""
+                ],
+                "name": "click",
+                "scope": "me"
+            },
+            "designerId": "d0c4a0b7-dfc7-4587-919c-a603c5f4a4ff"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|controlQuery": "#detailsPanel #removeButton",
+                "designer|params": [
+                    "target"
+                ],
+                "fn": "remove",
+                "implHandler": [
+                    "var me = this;",
+                    "",
+                    "// Confirm this delete",
+                    "Ext.Msg.confirm('Confirm', 'Are you sure you want to delete this task?', function(btn) {",
+                    "",
+                    "    // User confirmed yes",
+                    "    if (btn == 'yes') {",
+                    "",
+                    "        var data = target.up('panel').data,\t\t\t\t// Get assosiated data",
+                    "            store = me.getTasksStore(),\t\t\t\t\t// Get tasks store",
+                    "            task = store.getById(data.id),\t\t\t\t// Get current task",
+                    "            detailsPanel = me.getDetailsPanel(),\t\t// Get details panel",
+                    "            detailsToolbar = me.getDetailsToolbar();\t// Get details panel toolbar",
+                    "",
+                    "        store.remove(task);",
+                    "",
+                    "        task.destroy({",
+                    "            callback:function(records, operation){",
+                    "                var success = operation.wasSuccessful();",
+                    "",
+                    "                if(success){",
+                    "",
+                    "                    console.log('Sucessfully removed record: ', arguments);",
+                    "                }else{",
+                    "                    store.insert(task.index, task);",
+                    "                    console.log('Failure to remove record: ', arguments);",
+                    "                    Ext.Msg.alert('Server side Error', 'Unable to remove the record');",
+                    "                }",
+                    "            }",
+                    "        });",
+                    "",
+                    "",
+                    "        // Clear panel content",
+                    "        detailsPanel.update(null);",
+                    "",
+                    "        // Hide toolbar",
+                    "        detailsToolbar.hide();",
+                    "",
+                    "    }",
+                    "});"
+                ],
+                "name": "click",
+                "scope": "me"
+            },
+            "designerId": "b98ca3bb-f3ae-4325-bb62-345e81cd9b07"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "detailsPanel",
+                "selector": "#detailsPanel"
+            },
+            "designerId": "d5fcba7c-366a-4285-baa8-1ad5e532d2d0"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "detailsToolbar",
+                "selector": "#detailsPanel #detailsToolbar",
+                "xtype": null
+            },
+            "designerId": "fc4ec857-1bbe-40eb-800c-d002cae9f090"
+        }
+    ]
+}

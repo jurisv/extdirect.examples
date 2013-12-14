@@ -1,0 +1,175 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "bodyPadding": null,
+        "bodyStyle": [
+            "{",
+            "    \"background-color\": \"#fff\"",
+            "}"
+        ],
+        "designer|userAlias": "taskform",
+        "designer|userClassName": "TaskForm",
+        "height": null,
+        "id": null,
+        "itemId": "recordForm",
+        "layout": null,
+        "manageHeight": null,
+        "modal": true,
+        "requires": [
+            "Ext.form.field.ComboBox",
+            "Ext.form.field.Date",
+            "Ext.form.Label"
+        ],
+        "title": "Edit Record",
+        "width": 475
+    },
+    "designerId": "23afc0a3-a1b1-4f10-9622-02ebe055e576",
+    "cn": [
+        {
+            "type": "Ext.form.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyBorder": false,
+                "bodyPadding": 10,
+                "border": 0,
+                "height": null,
+                "itemId": "form",
+                "layout": null,
+                "manageHeight": null,
+                "title": ""
+            },
+            "designerId": "58e07a6f-7538-4db2-a0d4-302b0bbc3a16",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "",
+                        "fieldLabel": "Title",
+                        "labelAlign": "right",
+                        "margin": "0 0 10",
+                        "name": "title",
+                        "validateBlank": true
+                    },
+                    "designerId": "ee319f31-7d3b-4068-ad9a-f9009c24cca5"
+                },
+                {
+                    "type": "Ext.form.field.TextArea",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "cols": 45,
+                        "fieldLabel": "Description",
+                        "height": null,
+                        "labelAlign": "right",
+                        "margin": "0 0 10",
+                        "name": "description",
+                        "rows": 3
+                    },
+                    "designerId": "a35d024a-976b-43b7-bf66-82b3692048c1"
+                },
+                {
+                    "type": "Ext.form.field.Date",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "",
+                        "fieldLabel": "Due Date",
+                        "labelAlign": "right",
+                        "margin": "0 0 10",
+                        "name": "dueDate"
+                    },
+                    "designerId": "c8e51b7c-5854-4909-b8c6-086c4c9d7fcb"
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "allowBlank": false,
+                        "allowOnlyWhitespace": false,
+                        "displayField": "priority",
+                        "editable": false,
+                        "emptyText": "Select Priority",
+                        "fieldLabel": "Priority",
+                        "labelAlign": "right",
+                        "name": "priority",
+                        "store": "Priorities",
+                        "valueField": "priority"
+                    },
+                    "designerId": "22b16e0a-c02c-493d-bbaa-9f1c2281415e"
+                },
+                {
+                    "type": "Ext.container.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "middle",
+                        "container|pack": "center",
+                        "designer|displayName": "Buttons",
+                        "layout": "hbox",
+                        "padding": "10 10 10 10"
+                    },
+                    "designerId": "45147a56-a15e-430d-8923-eca5ae280a30",
+                    "cn": [
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|displayName": null,
+                                "id": null,
+                                "itemId": "saveButton",
+                                "margin": "5 5 5 5 ",
+                                "text": "Save"
+                            },
+                            "designerId": "39772e9c-24db-4d10-8653-35a7440591be"
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "cancelButton",
+                                "margin": "5 5 5 5",
+                                "text": "Cancel"
+                            },
+                            "designerId": "67e89290-54c9-4588-96b3-2548e4e00f95"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,111 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "task",
+        "designer|userClassName": "Task"
+    },
+    "designerId": "44284846-393f-4336-9e37-fe0ed78e1e2a",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "id",
+                "type": "int"
+            },
+            "designerId": "f1e46f0b-b766-478e-8e20-20fbc76c2f73"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "title"
+            },
+            "designerId": "d4580010-81b0-4a16-aca7-ac6aed2b950a"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "description"
+            },
+            "designerId": "91eb2fe9-630c-4f4f-ad51-7be8bee354d3"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "dueDate",
+                "type": "date"
+            },
+            "designerId": "ac58b12c-2d03-46ff-98a6-78a8e6a6e7e2"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "priority"
+            },
+            "designerId": "956d4c09-96c5-4256-94a6-f8e307316a3b"
+        },
+        {
+            "type": "Ext.data.proxy.Direct",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "api": [
+                    "{",
+                    "    create:  'ExtRemote.DXTask.create',",
+                    "    read:    'ExtRemote.DXTask.read',",
+                    "    update:  'ExtRemote.DXTask.update',",
+                    "    destroy: 'ExtRemote.DXTask.destroy'",
+                    "}"
+                ]
+            },
+            "designerId": "6d73b8f2-72e8-49dd-8600-a5157b903460",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "messageProperty": "message",
+                        "root": "data"
+                    },
+                    "designerId": "1f298345-2be3-42d3-9fe9-aeffade9f62f"
+                }
+            ]
+        }
+    ]
+}

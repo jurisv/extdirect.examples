@@ -1,0 +1,375 @@
+{
+    "type": "Ext.container.Viewport",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userClassName": "MainView",
+        "id": "mainView",
+        "layout": "fit",
+        "requires": [
+            "Ext.layout.container.Border",
+            "Ext.grid.Panel",
+            "Ext.grid.column.Template",
+            "Ext.grid.column.Date"
+        ]
+    },
+    "designerId": "698b7864-df89-4b9c-959f-0212282d4ead",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "cls": null,
+                "collapsed": false,
+                "id": null,
+                "itemId": "mainPanel",
+                "layout": "border",
+                "manageHeight": false,
+                "resizable": false,
+                "title": "My Tasks"
+            },
+            "configAlternates": {
+                "resizable": "boolean"
+            },
+            "designerId": "210be6aa-2456-4659-bafc-73e452201e3f",
+            "cn": [
+                {
+                    "type": "Ext.toolbar.Toolbar",
+                    "reference": {
+                        "name": "dockedItems",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "border": null,
+                        "designer|displayName": null,
+                        "dock": "top",
+                        "hideMode": null,
+                        "id": null,
+                        "itemId": "mainToolbar"
+                    },
+                    "designerId": "e4d9d8b0-eb3b-4e18-9fb8-e19c2f8cac69",
+                    "cn": [
+                        {
+                            "type": "Ext.form.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "html": null,
+                                "layout|flex": null,
+                                "text": null
+                            },
+                            "designerId": "7fb76c5b-6db8-43ae-b260-7ec2cba7ff16"
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "resources/images/add.png",
+                                "id": null,
+                                "itemId": "addButton",
+                                "layout|flex": null,
+                                "text": "Add Task"
+                            },
+                            "designerId": "bea93a2e-0317-4e11-8c26-d37ea2ff1afa"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "bodyBorder": true,
+                        "border": "2 2 2 2",
+                        "dock": null,
+                        "forceFit": true,
+                        "id": "",
+                        "itemId": "gridPanel",
+                        "layout|flex": 1,
+                        "layout|region": "west",
+                        "layout|split": true,
+                        "resizable": false,
+                        "resizeHandles": null,
+                        "store": "Tasks",
+                        "title": null,
+                        "width": 150
+                    },
+                    "configAlternates": {
+                        "resizable": "boolean"
+                    },
+                    "designerId": "b85ec3a4-7231-4b41-bddc-0964306009f7",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Template",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "text": "Task"
+                            },
+                            "designerId": "b23f7bd5-24b9-479c-92fe-76801bfef115",
+                            "cn": [
+                                {
+                                    "type": "Ext.XTemplate",
+                                    "reference": {
+                                        "name": "tpl",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|displayName": "tpl",
+                                        "implHandler": [
+                                            "<span style=\"font-size: 1.1em; font-weight: bold\">{title}</span>"
+                                        ]
+                                    },
+                                    "designerId": "ee958bca-05fc-4ab0-929e-6375102fb93e"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|displayName": "TitleField",
+                                        "name": "title"
+                                    },
+                                    "designerId": "bcfa43e7-112f-4f44-9173-89a57d77df7d"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Date",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "dueDate",
+                                "text": "Due Date"
+                            },
+                            "designerId": "ebfa67eb-e9ef-48cb-93fa-2984599ac71f",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Date",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|displayName": "DateField"
+                                    },
+                                    "designerId": "dd495ae2-7537-42f3-9ded-c57eb864ca78"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Template",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "text": "Priority"
+                            },
+                            "designerId": "0b0fe850-a6c8-49b8-8902-253f6245214b",
+                            "cn": [
+                                {
+                                    "type": "Ext.XTemplate",
+                                    "reference": {
+                                        "name": "tpl",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|displayName": "tpl",
+                                        "implHandler": [
+                                            "<table>",
+                                            "    <tr>",
+                                            "        <td style=\"padding-right: 8px\">",
+                                            "            <img src=\"resources/images/{priority}.png\" title=\"{priority} Priority\" />",
+                                            "        </td>",
+                                            "    \t<td>",
+                                            "            {priority}",
+                                            "        </td>",
+                                            "    </tr>",
+                                            "</table>"
+                                        ]
+                                    },
+                                    "designerId": "c851ddb1-9b16-40a6-8215-53306e07d37d"
+                                },
+                                {
+                                    "type": "Ext.form.field.ComboBox",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|displayName": "PriorityField",
+                                        "displayField": "priority",
+                                        "editable": false,
+                                        "emptyText": "Select Priority",
+                                        "name": "priority",
+                                        "store": "Priorities",
+                                        "valueField": "priority"
+                                    },
+                                    "designerId": "28cea1d3-1a0f-4d06-866f-5ab2dd393956"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.plugin.RowEditing",
+                            "reference": {
+                                "name": "plugins",
+                                "type": "array"
+                            },
+                            "codeClass": "Ext.grid.plugin.RowEditing",
+                            "designerId": "ef9c1521-2641-4052-bedc-ec2960c6af32"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "bodyBorder": true,
+                        "bodyPadding": "10 10 10 10",
+                        "border": "2 2 2 2",
+                        "data": [
+                            "{}"
+                        ],
+                        "designer|displayName": null,
+                        "id": null,
+                        "itemId": "detailsPanel",
+                        "layout": "fit",
+                        "layout|flex": 1,
+                        "layout|region": "center",
+                        "layout|split": true,
+                        "manageHeight": false,
+                        "resizable": false,
+                        "title": null
+                    },
+                    "configAlternates": {
+                        "resizable": "boolean"
+                    },
+                    "designerId": "136884f9-9ae1-4ffa-9933-a0d47a86ced7",
+                    "cn": [
+                        {
+                            "type": "Ext.toolbar.Toolbar",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "top",
+                                "hidden": true,
+                                "id": null,
+                                "itemId": "detailsToolbar"
+                            },
+                            "designerId": "5f1a0063-c1e8-4aa6-b7e3-10679d10a788",
+                            "cn": [
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "icon": "resources/images/edit.png",
+                                        "itemId": "editButton",
+                                        "layout|flex": null,
+                                        "text": "Edit"
+                                    },
+                                    "designerId": "293841ee-a56a-4310-b00a-db5d04c805f9"
+                                },
+                                {
+                                    "type": "Ext.toolbar.Separator",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null
+                                    },
+                                    "designerId": "8ffc9e0d-c72c-4e83-9ef2-0cb165309099"
+                                },
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "icon": "resources/images/delete.png",
+                                        "itemId": "removeButton",
+                                        "layout|flex": null,
+                                        "text": "Delete"
+                                    },
+                                    "designerId": "6018d89c-f993-4c8e-909e-c2c9c5c2dd5b"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.XTemplate",
+                            "reference": {
+                                "name": "tpl",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|displayName": null,
+                                "implHandler": [
+                                    "<tpl if=\"values.id\">",
+                                    "    <h1>{title}</h1>",
+                                    "    <p>",
+                                    "        {description}",
+                                    "    </p>",
+                                    "</tpl>",
+                                    "",
+                                    "<tpl if=\"!values.id\">",
+                                    "    <h1>Click task to view</h1>",
+                                    "</tpl>"
+                                ]
+                            },
+                            "designerId": "aff40032-1291-46d8-a893-3a494c39d61b"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

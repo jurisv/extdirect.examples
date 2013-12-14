@@ -1,0 +1,59 @@
+{
+    "name": "DemoArchitect",
+    "settings": {
+        "cmd": {
+            "license": "gpl",
+            "cmdVersion": "4.0.1.45",
+            "frameworkVersion": "4.2.1.883"
+        },
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Auto Expand",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            }
+        },
+        "urlPrefix": "",
+        "exportPath": "/Users/juris/Desktop/ArchitectBuild",
+        "spacesToIndent": 4,
+        "sdkPath": "",
+        "lineEnding": "LF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": true,
+        "generateArchitectVersion": true,
+        "lastBuildSelection": {
+            "value": "webBuild",
+            "display": "Build web app"
+        }
+    },
+    "xdsVersion": "3.0.0",
+    "xdsBuild": 1337,
+    "schemaVersion": 1,
+    "upgradeVersion": 300000000003,
+    "framework": "ext42",
+    "viewOrderMap": {
+        "view": [
+            "698b7864-df89-4b9c-959f-0212282d4ead",
+            "23afc0a3-a1b1-4f10-9622-02ebe055e576"
+        ],
+        "store": [
+            "0b3e9ea8-52b8-4463-9375-44b5a27689ff",
+            "47f9add9-8199-4df9-8382-dcd004c50caf"
+        ],
+        "controller": [
+            "2856dba3-c512-4b02-8986-a3e844ab0885"
+        ],
+        "model": [
+            "44284846-393f-4336-9e37-fe0ed78e1e2a"
+        ],
+        "resource": [
+            "67363d08-999e-4648-b11d-5d9fe657da91",
+            "4d38d540-262b-4b19-b202-f5253f8464f7"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

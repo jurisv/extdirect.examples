@@ -1,0 +1,46 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": [
+            "[",
+            "    { id: 1, priority: \"High\" },",
+            "    { id: 2, priority: \"Normal\" },",
+            "    { id: 3, priority: \"Low\" }",
+            "]"
+        ],
+        "designer|userClassName": "Priorities",
+        "storeId": "Priorities"
+    },
+    "designerId": "47f9add9-8199-4df9-8382-dcd004c50caf",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "id"
+            },
+            "designerId": "0c012870-ae14-4138-9673-b6e1546068db"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "priority"
+            },
+            "designerId": "3d278684-146d-44f3-933e-c2f8dc900b4a"
+        }
+    ]
+}
