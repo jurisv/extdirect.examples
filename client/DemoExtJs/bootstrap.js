@@ -12,6 +12,7 @@ Ext.Loader.addClassPathMappings({
 });
 Ext.ClassManager.addNameAlternateMappings({
   "DemoExtJs.Application": [],
+  "DemoExtJs.DirectAPI": [],
   "DemoExtJs.controller.Main": [],
   "DemoExtJs.model.TodoItem": [],
   "DemoExtJs.store.Todo": [],
@@ -780,6 +781,7 @@ Ext.ClassManager.addNameAlternateMappings({
 });
 Ext.ClassManager.addNameAliasMappings({
   "DemoExtJs.Application": [],
+  "DemoExtJs.DirectAPI": [],
   "DemoExtJs.controller.Main": [],
   "DemoExtJs.model.TodoItem": [],
   "DemoExtJs.store.Todo": [],

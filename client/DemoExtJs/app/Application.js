@@ -1,6 +1,10 @@
 Ext.define('DemoExtJs.Application', {
     name: 'DemoExtJs',
 
+    requires:[
+        'DemoExtJs.DirectAPI'
+    ],
+
     extend: 'Ext.app.Application',
 
     views: [

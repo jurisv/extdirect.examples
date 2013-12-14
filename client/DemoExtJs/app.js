@@ -4,20 +4,6 @@
     Sencha Cmd when upgrading.
 */
 
-/*
- Require Ext.Direct classes
- */
-Ext.require([
-    'Ext.direct.*'
-]);
-
-/*
- Add provider. Name must match settings on serverside
- */
-Ext.onReady(function(){
-    Ext.direct.Manager.addProvider(ExtRemote.REMOTING_API);
-});
-
 Ext.application({
     name: 'DemoExtJs',
 
