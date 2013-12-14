@@ -5,6 +5,7 @@
  * metadata-driven class system features 
  */
 Ext.Loader.addClassPathMappings({
+  "DemoExtJs": "app",
   "DemoTouch": "app",
   "Ext": "touch/src",
   "Ext.device.Purchases.Product": "touch/src/device/purchases/Sencha.js",
@@ -19,6 +20,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
+  "DemoExtJs.DirectAPI": [],
   "DemoTouch.model.TodoItem": [],
   "DemoTouch.overrides.form.Panel": [],
   "DemoTouch.store.Todo": [],
@@ -644,6 +646,7 @@ Ext.ClassManager.addNameAlternateMappings({
   ]
 });
 Ext.ClassManager.addNameAliasMappings({
+  "DemoExtJs.DirectAPI": [],
   "DemoTouch.model.TodoItem": [],
   "DemoTouch.overrides.form.Panel": [],
   "DemoTouch.store.Todo": [],

@@ -51,12 +51,6 @@
     </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script>
-
-    <!--Production build requires explicit Ext namespece as it's not available at the time of API call-->
-    <script type="text/javascript">if(!Ext.ns){Ext.ns=function(){};var ExtRemote={};}</script>
-
-    <!-- Access direct API on another server. -->
-    <script type="text/javascript" src="http://localhost:3000/directapi"></script>
 </head>
 <body>
     <div id="appLoadingIndicator">
