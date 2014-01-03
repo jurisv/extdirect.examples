@@ -1,7 +1,7 @@
-var collectionName = 'todoitem';
+var collectionName = 'tasks';
 var mongoDB = global.App.database;
 
-var DXTodoItem  = {
+var DXTask  = {
     create: function(params, callback) {
         mongoDB.execute(function(collection){
                 collection.insert(params, {w:1}, function(err, result) {
@@ -125,4 +125,4 @@ var DXTodoItem  = {
     }
 };
 
-module.exports = DXTodoItem;
+module.exports = DXTask;

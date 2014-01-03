@@ -1,4 +1,4 @@
-####Sample node.js server implementation for Ext.Direct
+####Sample node.js server implementation for Ext.Direct using MySQL database server
 
 First you hve to adjust configuration values inside db-config.json and server.json config files.
 

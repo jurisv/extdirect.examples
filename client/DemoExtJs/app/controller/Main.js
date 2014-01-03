@@ -59,11 +59,14 @@ Ext.define('DemoExtJs.controller.Main', {
     },
 
     onTodoGridItemClick: function(dataview, record, item, index, e, eOpts) {
-        this.getEditor().loadRecord(record);
+        var form = this.getEditor();
+        form.getForm().loadRecord(record);
+        form.enable();
     },
 
     onInsertBtnClick: function() {
-        var record = Ext.create('DemoExtJs.model.TodoItem', {text:'New todo action', complete:0});
+        var store = Ext.getStore('Todo');
+        var record = Ext.create('DemoExtJs.model.TodoItem', {text:'New todo action ' + +(store.getCount() +1), complete:0});
         record.save({
             callback:function(records, operation, success){
                 //we add to store only after successful insertion at the server-side
@@ -77,22 +80,23 @@ Ext.define('DemoExtJs.controller.Main', {
     },
 
     onRemoveBtnClick: function() {
+        var me = this;
         if(this.missingSelection()){
             Ext.Msg.alert('Error', 'Please select record to remove');
         }else{
-            var form = this.getEditor().getForm(),
+            var form = me.getEditor().getForm(),
                 record = form.getRecord(),
                 store = Ext.getStore('Todo');
-            this.getTodoGrid().getSelectionModel().deselect(record);
+            me.getTodoGrid().getSelectionModel().deselect(record);
 
             store.remove(record);
 
             record.destroy({
                 callback:function(records, operation){
                     var success = operation.wasSuccessful();
-
+                    form.reset();
+                    me.getEditor().disable();
                     if(success){
-                        form.reset();
                         console.log('Sucessfully removed record: ', arguments);
                     }else{
                         store.insert(record.index, record);

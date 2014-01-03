@@ -7,6 +7,14 @@ var DXFormTest = {
         });
     },
 
+    testException: function(params, callback){
+        failedHere; // explicit typo
+        callback({
+            success:true
+        });
+    },
+
+
     load: function(params, callback){
         callback({
             success:true,
@@ -23,10 +31,10 @@ var DXFormTest = {
             success:true,
             params:params
         });
-
     },
 
-    filesubmit: function(params, files, callback/*formHandler*/){
+    filesubmit: function(params, callback, sessionID, request, response/*formHandler*/){
+        var files = request.files; //get files from request object
         // console.log(params, files)
 
         // Do something with uploaded file, e.g. move to another location
@@ -35,7 +43,15 @@ var DXFormTest = {
             tmp_path = file.path;
 
         // set where the file should actually exists - in this case it is in the "demo" directory
-        var target_path = './public/demo/' + file.name;
+        var target_path = './public/uploaded_images/' + file.name;
+
+        var successfulUpload = function(cb){
+
+        };
+
+        var failedUpload = function(cd, error){
+
+        };
 
         // move the file from the temporary location to the intended location
         // do it only if there is a file with size
@@ -45,7 +61,7 @@ var DXFormTest = {
                     if(err){
                         callback({
                             success: false,
-                            msg: 'Upload failed',
+                            msg: "Upload failed - can't rename the file",
                             errors: err.message
                         });
                     }
@@ -60,17 +76,21 @@ var DXFormTest = {
                     });
                 });
             }catch(e) {
-                callback({
-                    success: false,
-                    msg: 'Upload failed',
-                    errors: e.message
-                });
+//                callback({
+//                    success: false,
+//                    msg: "Upload failed - can't rename the file",
+//                    errors: e.message
+//                });
             }
         }else{
             callback({
                 success: false,
-                msg: 'No file',
-                params: params
+                msg: "Upload failed - empty file",
+                params: params,
+                errors: {
+                    clientCode: "File not found",
+                    portOfLoading: "This field must not be null"
+                }
             });
         }
     }

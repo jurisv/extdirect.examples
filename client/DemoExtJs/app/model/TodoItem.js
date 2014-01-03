@@ -3,8 +3,8 @@ Ext.define('DemoExtJs.model.TodoItem', {
 
     fields: [
         {
-            name: 'id',
-            type: 'int'
+            name: 'id'
+            //,mapping: '_id'  // IMPORTANT! Add for MongoDb backend example
         },
         {
             name: 'text'

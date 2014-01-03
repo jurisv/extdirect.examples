@@ -26,7 +26,13 @@ Ext.define('DemoExtJs.view.GridActions',{
                 dock:'top',
                 items:[
                     {
-                        text:'Click to Reload data',
+                        xtype: 'button',
+                        action: 'insertRecord',
+                        icon:'resources/assets/plus-circle.png',
+                        text: 'Insert blank record'
+                    },
+                    {
+                        text:'Reload data',
                         icon:'resources/assets/arrow-circle-double-135.png',
                         action:'loadStore'
                     },'->',{
@@ -52,19 +58,16 @@ Ext.define('DemoExtJs.view.GridActions',{
 
             columns: [
                 {
-                    xtype: 'numbercolumn',
                     dataIndex: 'id',
                     text: 'Id',
-                    format: '0'
+                    width: 170
                 },
                 {
-                    xtype: 'gridcolumn',
                     flex:1,
                     dataIndex: 'text',
                     text: 'Text'
                 },
                 {
-                    xtype: 'gridcolumn',
                     dataIndex: 'complete',
                     renderer:function(value){return value ? 'Done' : 'Not yet'},
                     text: 'Complete'
@@ -86,14 +89,16 @@ Ext.define('DemoExtJs.view.GridActions',{
             xtype: 'form',
             region:'east',
             split:true,
+            disabled:true,
             width: 350,
             itemId: 'todoForm',
             bodyPadding: 10,
             title: 'Edit details',
             items: [
                 {
-                    xtype: 'numberfield',
+                    xtype: 'textfield',
                     anchor: '100%',
+                    disabled: true,
                     fieldLabel: 'Id',
                     name: 'id'
                 },
@@ -113,31 +118,28 @@ Ext.define('DemoExtJs.view.GridActions',{
                     boxLabel: 'Yes'
                 }
             ],
-            dockedItems:[{
-                xtype:'toolbar',
-                height:29, //visual tweak, as paging toolbar is 1px taller...
-                dock: 'bottom',
-                items:[
-                    {
-                        xtype: 'button',
-                        action: 'insertRecord',
-                        icon:'resources/assets/plus-circle.png',
-                        text: 'Insert blank record'
-                    },{
-                        xtype: 'button',
-                        action: 'updateRecord',
-                        icon:'resources/assets/pencil.png',
-                        text: 'Update'
-                    },{
-                        xtype: 'button',
-                        action: 'removeRecord',
-                        icon:'resources/assets/minus-circle.png',
-                        text: 'Remove selected'
-                    },'->'
-                ]
+            dockedItems:[
+                {
+                    xtype:'toolbar',
+                    dock: 'top',
+                    items:[
+                        {
+                            xtype: 'button',
+                            action: 'removeRecord',
+                            icon:'resources/assets/minus-circle.png',
+                            text: 'Remove selected'
+                        }, '->',{
+                            xtype: 'button',
+                            action: 'updateRecord',
+                            icon:'resources/assets/pencil.png',
+                            text: 'Update'
+                        }
+                    ]
 
 
-            }]
+                }
+
+            ]
         }
     ]
 });

@@ -3,8 +3,8 @@ Ext.define('DemoTouch.model.TodoItem', {
     config: {
         idProperty: 'id',
         fields: [{
-            name: 'id',
-            type: 'int'
+            name: 'id'
+           // ,mapping: '_id' // IMPORTANT! Add for MongoDb backend example
         }, {
             name: 'text',
             type: 'string'

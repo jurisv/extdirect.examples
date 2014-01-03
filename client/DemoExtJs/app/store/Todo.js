@@ -7,6 +7,8 @@ Ext.define('DemoExtJs.store.Todo', {
 
     autoLoad: true,
 
+    remoteSort:true, //enable remote filter
+
     remoteFilter:true, //enable remote sorting
 
     pageSize: 5,

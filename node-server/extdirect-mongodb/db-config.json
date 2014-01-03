@@ -1,0 +1,6 @@
+{
+    "hostname": "localhost",
+    "port": 27017,
+    "db": "extdirectnode",
+    "auto_reconnect" : true
+}

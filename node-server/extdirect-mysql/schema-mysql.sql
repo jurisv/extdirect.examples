@@ -68,7 +68,7 @@ INSERT INTO `todoitem` (`id`, `text`, `complete`) VALUES
   (3, 'Wake up refreshed', 1),
   (4, 'Take shower', 1),
   (5, 'Prepare breakfast', 0),
-  (6, 'Raad morning newspapers', 0),
+  (6, 'Read morning newspapers', 0),
   (7, 'Watch Good Morning America', 0),
   (8, 'Dress up for the meeting', 0),
   (9, 'Check email', 0),
