@@ -39,9 +39,9 @@ Step 2: Configure and start server
 Step 3: Import initial sample data from todoitem.json (optional)
     From terminal:
 
-    ```sh
+
     mongoimport --db extdirectnode --collection todoitem --jsonArray --file todoitem.json
-    ```
+
 
 We highly recommend adding adding mongodb/bin to you PATH as this makes everything a lot easier.
 
