@@ -24,7 +24,6 @@ Ext.define('DemoArchitect.store.Tasks', {
         var me = this;
         cfg = cfg || {};
         me.callParent([Ext.apply({
-            autoLoad: true,
             model: 'DemoArchitect.model.Task',
             storeId: 'Tasks'
         }, cfg)]);
