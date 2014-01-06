@@ -293,6 +293,26 @@
                 "xtype": null
             },
             "designerId": "fc4ec857-1bbe-40eb-800c-d002cae9f090"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|controlQuery": "#gridPanel",
+                "designer|targetType": "Ext.grid.Panel",
+                "fn": "onGridpanelRender",
+                "implHandler": [
+                    "    component.getStore().load();",
+                    ""
+                ],
+                "name": "render",
+                "scope": "me"
+            },
+            "designerId": "055b4338-b669-4be4-b6c0-c27d343289c5"
         }
     ]
 }

@@ -6,7 +6,7 @@
     },
     "codeClass": null,
     "userConfig": {
-        "autoLoad": true,
+        "autoLoad": null,
         "designer|userClassName": "Tasks",
         "model": "Task",
         "storeId": "Tasks"

@@ -182,10 +182,16 @@ Ext.define('DemoArchitect.controller.Tasks', {
         });
     },
 
+    onGridpanelRender: function(component, eOpts) {
+            component.getStore().load();
+
+    },
+
     init: function(application) {
         this.control({
             "#gridPanel": {
-                select: this.view
+                select: this.view,
+                render: this.onGridpanelRender
             },
             "#mainPanel #addButton": {
                 click: this.add
