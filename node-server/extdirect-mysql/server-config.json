@@ -25,6 +25,7 @@
         "server": "localhost",
         "port": "3000",
         "protocol": "http",
+        "relativeUrl": false,
         "appendRequestResponseObjects": true
     }
 }
