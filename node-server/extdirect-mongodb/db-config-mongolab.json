@@ -1,0 +1,8 @@
+{
+    "hostname": "dsxxxxx.mongolab.com",
+    "port": 30817,
+    "db": "MongoLab-xx",
+    "auto_reconnect" : true,
+    "dbusername" : "myusernamexx",
+    "dbpassword" : "mypasswordxx"
+}
