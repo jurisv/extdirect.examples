@@ -4,7 +4,8 @@
 var mongodb = require('mongodb'),
     nconf = require('nconf');
 
-nconf.env().file({ file: 'db-config.json'});
+//nconf.env().file({ file: 'db-config.json'});
+nconf.env().file({ file: 'db-config-mongolab.json'});
 
 var dbConfig = nconf.get();
 
@@ -43,12 +44,19 @@ var db = {
                     process.exit(1);
                 }
                 else{
-                    if(callback){
-                        if(collectionName){
-                            callback(me.database.collection(collectionName));
-                        }else{
-                            callback();
-                        }
+                    if (callback) {
+                        me.database.authenticate(me.config.dbusername, me.config.dbpassword,
+                            {
+                                authMechanism: 'MONGODB-CR'  // not recommended because clear text
+                                //authMechanism: 'MONGODB-X509'
+                            },
+                            function (err) {
+                                if (collectionName) {
+                                    callback(me.database.collection(collectionName));
+                                } else {
+                                    callback();
+                                }
+                            });
                     }
                 }
             });
