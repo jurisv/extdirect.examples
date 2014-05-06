@@ -4,8 +4,8 @@
 var mongodb = require('mongodb'),
     nconf = require('nconf');
 
-//nconf.env().file({ file: 'db-config.json'});
-nconf.env().file({ file: 'db-config-mongolab.json'});
+nconf.env().file({ file: 'db-config.json'});
+//nconf.env().file({ file: 'db-config-mongolab.json'});
 
 var dbConfig = nconf.get();
 
@@ -21,6 +21,7 @@ var db = {
 
     init :function(fn){
         var cfg = this.config;
+
         this.client = new this.mongo.MongoClient(new this.mongo.Server(cfg.hostname, cfg.port, {auto_reconnect: cfg.auto_reconnect}));
         this.database = this.client.db(cfg.db);
 
@@ -45,22 +46,34 @@ var db = {
                 }
                 else{
                     if (callback) {
-                        me.database.authenticate(me.config.dbusername, me.config.dbpassword,
+
+                        var doCallback = function(db,collectionName) {
+                            if (collectionName)
                             {
-                                authMechanism: 'MONGODB-CR'  // not recommended because clear text
-                                //authMechanism: 'MONGODB-X509'
-                            },
-                            function (err) {
-                                if (collectionName) {
-                                    callback(me.database.collection(collectionName));
-                                } else {
-                                    callback();
-                                }
-                            });
+                                callback(db.collection(collectionName));
+                            }
+                            else
+                            {
+                                callback();
+                            }
+                        };
+
+                        // if no username and password specified then do not do authentication
+                        if (me.config.dbusername && me.config.dbpassword) {
+                            me.database.authenticate(me.config.dbusername, me.config.dbpassword,
+                                {
+                                    authMechanism: 'MONGODB-CR'  // not recommended because clear text
+                                    //authMechanism: 'MONGODB-X509'
+                                },
+                                function (err) {
+                                    doCallback(me.database, collectionName);
+                                });
+                        } else {
+                            doCallback(me.database, collectionName);
+                        }
                     }
                 }
             });
-
     },
 
     close : function(){
