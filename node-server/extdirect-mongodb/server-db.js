@@ -34,38 +34,45 @@ var db = {
         return new this.mongo.ObjectID(id);
     },
 
+    processError: function(err){
+        console.error('Connection had errors: ', err.code);
+        console.error('Connection params used: hostname = ' +  cfg.hostname + ', port = ' + cfg.port + ', db = '+  cfg.db );
+        if(cfg.breakOnError)
+            this.process.exit(1);
+    },
+
+
     execute : function(callback, collectionName){
-        var me = this;
+        var me = this,
+            cfg = me.config;
 
             this.client.open(function(err, cli) {
                 if(err){
-                    var cfg = this.config;
-                    console.error('Connection had errors: ', err.code);
-                    console.error('Connection params used: hostname = ' +  cfg.hostname + ', port = ' + cfg.port + ', db = '+  cfg.db );
-                    process.exit(1);
+                    this.processError(err);
                 }
                 else{
                     if (callback) {
 
                         var doCallback = function(db,collectionName) {
-                            if (collectionName)
-                            {
+                            if (collectionName) {
                                 callback(db.collection(collectionName));
                             }
-                            else
-                            {
+                            else {
                                 callback();
                             }
                         };
 
                         // if no username and password specified then do not do authentication
-                        if (me.config.dbusername && me.config.dbpassword) {
-                            me.database.authenticate(me.config.dbusername, me.config.dbpassword,
+                        if (cfg.dbusername && cfg.dbpassword) {
+                            me.database.authenticate(cfg.dbusername, cfg.dbpassword,
                                 {
                                     authMechanism: 'MONGODB-CR'  // not recommended because clear text
                                     //authMechanism: 'MONGODB-X509'
                                 },
                                 function (err) {
+                                    if(err){
+                                        this.processError(err);
+                                    }
                                     doCallback(me.database, collectionName);
                                 });
                         } else {
