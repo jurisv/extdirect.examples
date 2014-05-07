@@ -35,10 +35,13 @@ var db = {
     },
 
     processError: function(err){
+        var me = this,
+            cfg = me.config;
+            
         console.error('Connection had errors: ', err.code);
         console.error('Connection params used: hostname = ' +  cfg.hostname + ', port = ' + cfg.port + ', db = '+  cfg.db );
         if(cfg.breakOnError)
-            this.process.exit(1);
+            me.process.exit(1);
     },
 
 
