@@ -48,7 +48,7 @@ var db = {
 
             this.client.open(function(err, cli) {
                 if(err){
-                    this.processError(err);
+                    me.processError(err);
                 }
                 else{
                     if (callback) {
@@ -71,7 +71,7 @@ var db = {
                                 },
                                 function (err) {
                                     if(err){
-                                        this.processError(err);
+                                        me.processError(err);
                                     }
                                     doCallback(me.database, collectionName);
                                 });
