@@ -62,3 +62,83 @@ fields: [
     }
 ],
  ```
+
+###MongoDb Authentification
+
+This guide is valid for MongoDB version 2.6+. Please verify your version and upgrade as necessary.
+
+By default MongDb does not require any sort of authentification. With that in mind everyone has access to your database.
+While it might seem okay for development purposes, it would be a great idea to enable one of the authentification methods to disable such an access.
+This will be required if you would like to access remote DB server like one hosted by MobgoLab.
+
+MongoDb provides several types to choose:
+
+MONGODB-CR	        MongoDB challenge/response authentication.
+MONGODB-X509 (v2.6)	MongoDB SSL certificate authentication.
+PLAIN	(v2.6)      External authentication using LDAP. You can also use PLAIN for authenticating in-database users. PLAIN transmits passwords in plain text. This mechanism is available only in MongoDB Enterprise.
+GSSAPI	            External authentication using Kerberos. This mechanism is available only in MongoDB Enterprise.
+
+For detailed information on how to setup the authentification, please consult security section: http://docs.mongodb.org/manual/security/
+
+As part of the demo we provide sample config file that can be used to start up mongoDb server instance with authentification enabled.
+
+To start with database server from node-server/extdirect-mongodb folder run the following command in terminal.
+This will consume the sample config file: mongodb.conf
+
+```
+mongod --config mongodb.conf
+```
+
+Note: Configuration files are written using YAML format.
+
+More information on available config options and their values can be found here: http://docs.mongodb.org/manual/reference/configuration-options/
+
+This example uses user "admin" along with password "PassWord" in admin database and user "script" with password "123456". Be sure to change them to something more secure.
+Server configuration for this purpose requires some manual work. To do that launch 'mongo' command line interface and run the following commands:
+
+```
+use admin
+db.createUser(
+  {
+    user: "admin",
+    pwd: "PassWord",
+    roles:
+    [
+      {
+        role: "userAdminAnyDatabase",
+        db: "admin"
+      }
+    ]
+  }
+)
+use extdirectnode
+db.createUser(
+  {
+    user: "script",
+    pwd: "123456",
+    roles:
+    [
+      {
+        role: "dbOwner",
+        db: "extdirectnode"
+      }
+    ]
+  }
+)
+```
+
+If you wouldl like to connect to MongoLab db you can use this config as a reference and use your own credentials.
+
+```
+{
+    "hostname": "dsxxxxx.mongolab.com",
+    "port": 30817,
+    "db": "MongoLab-xx",
+    "enableAuthorization": true,
+    "authMechanism": "MONGODB-CR",
+    "username": "myusernamexx",
+    "password": "mypasswordxx",
+    "autoReconnect" : true,
+    "breakOnError": true
+}
+```

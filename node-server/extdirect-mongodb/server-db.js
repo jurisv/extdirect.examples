@@ -5,24 +5,21 @@ var mongodb = require('mongodb'),
     nconf = require('nconf');
 
 nconf.env().file({ file: 'db-config.json'});
-//nconf.env().file({ file: 'db-config-mongolab.json'});
 
-var dbConfig = nconf.get();
+var cfg = nconf.get();
 
 var db = {
 
     database: null,
 
-    config: dbConfig,
+    config: cfg,
 
     mongo: mongodb,
 
     client: null,
 
     init :function(fn){
-        var cfg = this.config;
-
-        this.client = new this.mongo.MongoClient(new this.mongo.Server(cfg.hostname, cfg.port, {auto_reconnect: cfg.auto_reconnect}));
+        this.client = new this.mongo.MongoClient(new this.mongo.Server(cfg.hostname, cfg.port, {auto_reconnect: cfg.autoReconnect}));
         this.database = this.client.db(cfg.db);
 
         if(fn){
@@ -35,55 +32,40 @@ var db = {
     },
 
     processError: function(err){
-        var me = this,
-            cfg = me.config;
-            
-        console.error('Connection had errors: ', err.code);
-        console.error('Connection params used: hostname = ' +  cfg.hostname + ', port = ' + cfg.port + ', db = '+  cfg.db );
-        if(cfg.breakOnError)
-            me.process.exit(1);
+        if(global.App.mode === 'development'){
+            console.error('Connection had errors! Code:', err.code, ', '+err.name + ':', err.errmsg);
+            console.error('Connection params used: hostname = ' +  cfg.hostname + ', port = ' + cfg.port + ', db = '+  cfg.db, ', enableAuthorization =', cfg.enableAuthorization);
+            if(cfg.breakOnError)
+                process.exit(1);
+        }
     },
 
 
     execute : function(callback, collectionName){
-        var me = this,
-            cfg = me.config;
+        var me = this;
 
-            this.client.open(function(err, cli) {
-                if(err){
-                    me.processError(err);
-                }
-                else{
-                    if (callback) {
+        if (callback) {
+            var cb = function(db, collectionName) {
+                collectionName ? callback(db.collection(collectionName)) : callback();
+            };
 
-                        var doCallback = function(db,collectionName) {
-                            if (collectionName) {
-                                callback(db.collection(collectionName));
-                            }
-                            else {
-                                callback();
-                            }
-                        };
+            if (cfg.enableAuthorization) {
+                db.authorize(cfg.authMechanism, cfg.username, cfg.password,
+                    function(){
+                        cb(me.database, collectionName);
+                    });
 
-                        // if no username and password specified then do not do authentication
-                        if (cfg.dbusername && cfg.dbpassword) {
-                            me.database.authenticate(cfg.dbusername, cfg.dbpassword,
-                                {
-                                    authMechanism: 'MONGODB-CR'  // not recommended because clear text
-                                    //authMechanism: 'MONGODB-X509'
-                                },
-                                function (err) {
-                                    if(err){
-                                        me.processError(err);
-                                    }
-                                    doCallback(me.database, collectionName);
-                                });
-                        } else {
-                            doCallback(me.database, collectionName);
-                        }
+            } else {
+                this.client.open(function(err, cli) {
+                    if(err){
+                        me.processError(err);
                     }
-                }
-            });
+                    else{
+                        cb(me.database, collectionName);
+                    }
+                });
+            }
+        }
     },
 
     close : function(){
@@ -111,18 +93,43 @@ var db = {
             }
             });
         }
+    },
+
+    authorize: function(method, username, password, fn){
+        var me = this;
+
+        me.client.open(function(err, cli) {
+            if(err) {
+                me.processError(err);
+            }
+            else{
+                me.database.authenticate(username, password, {
+                        authMechanism: method
+                    },
+                    function (err, result) {
+                        if(err){
+                            me.processError(err);
+                        }
+                        if(fn)fn();
+                    }
+                );
+            }
+        });
     }
 };
 
-//connect to db and open connection
+//Connect to db. This will test connection for given scenario.
 db.init(
     function(){
-        db.execute(
-            function(){
-                console.log('Successfully connected to database: ' + db.config.db);
+        if (cfg.enableAuthorization){
+            db.authorize(cfg.authMechanism, cfg.username, cfg.password, function(){
+                console.log('Successfully connected to database [Authentification enabled]: ' + db.config.db);
                 db.close();
-            }
-        );
+            });
+        }else{
+            console.log('Successfully connected to database: ' + db.config.db);
+            db.close();
+        }
     }
 );
 
