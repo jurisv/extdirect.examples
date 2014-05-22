@@ -16,6 +16,7 @@ Ext.define('DemoExtJs.view.Cookies',{
             items: [
                 {
                     xtype: 'button',
+                    formBind:true,
                     text: 'Authentificate using credentials below',
                     handler: function(bt){
                         ExtRemote.DXLogin.authenticate(bt.up('demo-cookies').getValues(),
@@ -37,20 +38,25 @@ Ext.define('DemoExtJs.view.Cookies',{
         }
     ],
 
+    defaults: {
+        xtype: 'textfield',
+        msgTarget:'side',
+        allowBlank:false
+    },
     items: [
         {
-            xtype: 'textfield',
             name: 'username',
             fieldLabel: 'Username'
         },
         {
-            xtype: 'textfield',
             name: 'password',
             inputType: 'password',
             fieldLabel: 'Password'
+        },
+        {
+            xtype:'component',
+            margin:'20 0 0 0',
+            html:'Note: Please enter username and password before submitting the form'
         }
-
     ]
-
-
 });

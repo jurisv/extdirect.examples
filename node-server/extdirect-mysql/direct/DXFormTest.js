@@ -29,6 +29,7 @@ var DXFormTest = {
     submit: function(params,  callback/*formHandler*/){
         callback({
             success:true,
+            msg: 'User data updated',
             params:params
         });
     },
