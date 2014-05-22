@@ -14,24 +14,44 @@ Prerequisites after checking out:
 For single server application copy client subfolders (e.g. DemoExtJs) to folder named 'public'
 For test setup that demonstrates CORS support you will need second server of your choice (Apache- MAMP, WAMP, e.t.c.). In this case you serve from matching client folder.
 
+###Sencha CMD
+
+To run ExtJs4 and Sencha Touch examples Sencha Cmd v4.0.4.84 must be installed on development machine.
+Ext5 requires CMD 5.x TBD or above.
 
 ###Frameworks
 
-Important: Sample project you are downloading does not have framework!
+Important: Sample project you are downloading doesn't provide Sencha framework!
 You have to download it and place inside sample folders.
+To do that run the following commands (replace FrameworkFolderOnyYourMachine with the actual one where you have downloaded and extracted one of the Sencha frameworks):
 
-For ExtJs it will be:  client/DemoExtJs/ext (Expects version 4.2.1.883 +)
+* ExtJs:  client/DemoExtJs/ext (Expects version 4.2.1.883 +)
+```
+cd FrameworkFolderOnyYourMachine
+sencha generate app DemoExtJs ~/Desktop/DemoExtJs
+```
+Once command is completed copy ext folder content from ~/Desktop/DemoExtJs to  client/DemoExtJs/ext
 
-For Sencha Touch :  client/DemoTouch/touch (Expects version 2.3.1+)
 
-###Sencha CMD
+* Sencha Touch :  client/DemoTouch/touch (Expects version 2.3.1+)
+```
+cd FrameworkFolderOnyYourMachine
+sencha generate app DemoExtJs ~/Desktop/DemoExtJs
+```
+Once command is completed copy ext folder content from ~/Desktop/DemoExtJs to  client/DemoExtJs/ext
 
-Sencha Cmd v4.0.1.45 must be installed on development machine.
+
+Ext5 client/DemoExt5/ext (Expects version TBD)
+```
+cd FrameworkFolderOnyYourMachine
+sencha generate app DemoExtJs ~/Desktop/DemoExtJs
+```
+Once command is completed copy ext folder content from ~/Desktop/DemoExtJs to  client/DemoExt5/ext
 
 ###Building
 
 Before you can run any of examples you should use Sencha CMD.
-From commandline (must be in client/DemoExtJS or client/DemoTouch folder depending on which project are you building):
+From commandline (must be in client/DemoExtJS, client/DemoExt5 or client/DemoTouch folder depending on which project are you building):
 
     * 'sencha app refresh'
     * 'sencha app build'
