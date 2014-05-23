@@ -5,6 +5,8 @@
     by the slicer example page to capture theme sprites
     -->
     <target name="-compile-slicer-sass" depends="-init-compiler">
+        <local name="app.example.scss.tmp"/>
+        <property name="app.example.scss.tmp" value="${app.example.scss}.tmp"/>
         <x-normalize-path 
             path="${build.dir}/resources" 
             property="image.search.path"/>
@@ -24,7 +26,7 @@
                     +rules
                     -variable=$image-search-path:'${image.search.path}'
                     -variable=$theme-name: '${app.theme}' !default
-                    -output=${app.example.scss}
+                    -output=${app.example.scss.tmp}
                 and
                 restore
                     page
@@ -34,6 +36,15 @@
                     -output=${app.example.out.ruby}
             ]]>
         </x-compile>
+
+        <if>
+            <not>
+                <filesmatch file1="${app.example.scss.tmp}" file2="${app.example.scss}"/>
+            </not>
+            <then>
+                <copy file="${app.example.scss.tmp}" tofile="${app.example.scss}" overwrite="true"/>
+            </then>
+        </if>
 
         <x-get-relative-path from="${app.example.dir}"
                              to="${app.example.css}"
@@ -73,8 +84,28 @@
     -->
     <target name="-slice-app-theme" depends="-detect-app-build-properties">
         <x-ant-call target="-compass-compile-slicer-css"/>
-        <x-run-bootstrap file="${bootstrap.example.js}" 
-                         basedir="${bootstrap.base.path}"/>
+
+        <local name="relpath"/>
+        <x-get-relative-path from="${bootstrap.base.path}"
+                             to="${framework.packages.dir}"
+                             property="relpath"/>
+
+        <x-bootstrap file="${bootstrap.example.js}"
+                     basedir="${bootstrap.base.path}"
+                     includeBoot="true"
+                     includeCoreFiles="true"
+                     overrideTpl="${bootstrap.override.tpl}"
+                     overrideTplType="${bootstrap.override.tpltype}"
+                     overrideExcludeTags="">
+<![CDATA[
+Ext.Boot.loadSync([
+    "render.js",
+    "${relpath}/ext-theme-base/sass/example/manifest.js",
+    "${relpath}/ext-theme-base/sass/example/shortcuts.js",
+    "custom.js"
+]);
+]]>
+        </x-bootstrap>
        
         <echo>Capture theme image to ${build.capture.png}</echo>
         <x-sencha-command>

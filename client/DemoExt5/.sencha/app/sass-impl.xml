@@ -6,22 +6,40 @@
     used by the app, then including the corresponding scss files into the 
     app's style
     -->
-    <target name="-compile-sass" depends="-init-compiler">
+    <target name="-compile-sass" depends="-init-app-js-files">
+        <local name="app.out.scss.tmp"/>
+        <local name="sass.name.filter"/>
+		<property name="app.out.scss.tmp" value="${app.out.scss}.tmp"/>
         <x-normalize-path 
             path="${build.dir}/resources" 
             property="image.search.path"/>
         
+        <if>
+            <x-is-true value="${build.include.all.scss}"/>
+            <then>
+                <property name="sass.name.filter">
+                    include
+                        -all
+                </property>
+            </then>
+        </if>
+        <property name="sass.name.filter">
+            restore
+                page
+        </property>
+        
+        
+        
         <x-compile refid="${compiler.ref.id}">
             <![CDATA[
-                restore
-                    page
+                ${sass.name.filter}
                 and
                 #only set variables for used classes eg. $include-class-name
                 sass
                     +class-name-vars
                     -variable=$image-search-path:'${image.search.path}'
                     -variable=$theme-name: '${app.theme}' !default
-                    -output=${app.out.scss}
+                    -output=${app.out.scss.tmp}
                 and
                 include
                     -all
@@ -31,7 +49,7 @@
                     +etc
                     +vars
                     +append
-                    -output=${app.out.scss}
+                    -output=${app.out.scss.tmp}
                 and
                 restore
                     page
@@ -40,13 +58,23 @@
                 sass
                     +rules
                     +append
-                    -output=${app.out.scss}
+                    -output=${app.out.scss.tmp}
                 and
                 sass
                     +ruby
                     -output=${app.out.ruby}
             ]]>
         </x-compile>
+		
+		<if>
+			<not>
+				<filesmatch file1="${app.out.scss.tmp}" file2="${app.out.scss}"/>
+			</not>
+			<then>
+				<copy file="${app.out.scss.tmp}" tofile="${app.out.scss}" overwrite="true"/>
+			</then>
+		</if>
+		
         <!--
         app.out.css.path is relative to the app output index.html file
         -->
@@ -125,6 +153,8 @@
     -->
     <target name="-compass-compile-theme-package">
         <x-run-if-true value="${enable.ext42.themes}">
+            <local name="compress.uptodate"/>
+            
             <x-ant-call target="-compile-sass"/>
 
             <x-compass-compile
@@ -136,12 +166,23 @@
                 sassdir="${compass.sass.dir}"
                 cssdir="${compass.css.dir}"
                 config="${compass.config.file}"/>
+            
+            <uptodate property="compress.uptodate"
+                      value="true"
+                      srcfile="${app.out.scss}.tmp"
+                      targetfile="${app.out.css}"/>
 
-            <x-compress-css-files dir="${build.dir}/resources"
-                                  prefix="${app.out.base.debug}"
-                                  outprefix="${app.out.base}"
-                                  preprocess="${build.css.preprocess}"
-                                  compress="${build.css.compress}"/>
+            <if>
+                <x-is-true value="${compress.uptodate}"/>
+                <!--<x-is-true value="true"/>-->
+                <then>
+                    <x-compress-css-files dir="${build.dir}/resources"
+                                          prefix="${app.out.base.debug}"
+                                          outprefix="${app.out.base}"
+                                          preprocess="${build.css.preprocess}"
+                                          compress="${build.css.compress}"/>
+                </then>
+            </if>
         </x-run-if-true>
     </target>
 
