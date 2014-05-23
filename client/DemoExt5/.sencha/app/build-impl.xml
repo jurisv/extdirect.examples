@@ -116,6 +116,10 @@ this file in most cases.
         <property name="build.environment" value="package"/>
     </target>
 
+    <target name="development"
+            description="Sets the build environment to development.">
+        <property name="build.environment" value="development"/>
+    </target>
 
     <!--
     ===============================================================
@@ -232,8 +236,9 @@ this file in most cases.
     ===============================================================
     -->
     <import file="${basedir}/.sencha/app/watch-impl.xml"/>
-    <target name="watch">
-        <property name="build.optimize" value=""/>
+    <target name="watch"
+            depends="development,init"
+            description="Starts Watch to keep your app ready for dev mode">
         <x-ant-call>
             <target name="-before-watch"/>
             <target name="-watch"/>
@@ -458,37 +463,22 @@ process.
  * skip.resources   Do not copy resources to the build directory
  * skip.sass        Do not build the SASS.
  * skip.slice       Do not build the theme image slicer.
- * skip.theme       Do not build the theme images.
             
-The following properties can be used to modify the build process.
-            
- * build.compression.yui                Specify yui compression for the build
+Most build options are controlled by the app manifest. For details see:
+    
+    ${basedir}/app.json
 
- * build.compression.closure            Specify closure compression for the build
-            
- * build.compression.uglify             Specify uglify compression for the build
-            
- * build.options                        Set general options for the build
-                                        (eg: enable a debug build)
- 
-         To modify any of the previous build specific options, see:
-           ${basedir}/.sencha/app/${build.environment}.properties
-            
- * build.operations                     Insert commands into the compile command
-                                        for the build.
-            
- * app.page.name                        Set the input and output page file
-                                        for the compile command.
- 
- * build.classes.name                   Specify the compiled js file
-                                        
+For more specific controls over the build process, see:
 
+    ${basedir}/.sencha/app/defaults.properties
+            
 For details about how these options affect your build, see
 
     ${basedir}/.sencha/app/build-impl.xml
-
+    
 These options can be stored in a local.properties file in this folder or in the
-local.properties file in the workspace.
+local.properties file in the workspace. This file should not be included in 
+source control.
 
 Alternatively, these can be supplied on the command line. For example:
 

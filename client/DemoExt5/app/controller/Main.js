@@ -22,8 +22,8 @@ Ext.define('DemoExtJs.controller.Main', {
                 click: this.buttonActions
             },
 
-            'grid-actions #todoGrid toolbar trigger': {
-                'filter-reset': function(){ //not the best practice, please avoid if possible! this only shows that you can use dashes for event names.
+            'grid-actions #todoGrid toolbar #filter': {
+                reset: function(){ //not the best practice, please avoid if possible! this only shows that you can use dashes for event names.
                     //we can define logic also here
                     Ext.getStore('Todo').clearFilter();
                 }
@@ -48,7 +48,7 @@ Ext.define('DemoExtJs.controller.Main', {
     },
 
     filterStore: function(){
-        var field = Ext.ComponentQuery.query('grid-actions #todoGrid toolbar trigger')[0],
+        var field = this.getTodoGrid().down('toolbar #filter'),
             value = field.getValue(),
             store = Ext.getStore('Todo');
 

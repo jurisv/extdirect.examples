@@ -4,12 +4,11 @@ Ext.define('DemoExtJs.DirectAPI', {
      */
     requires: ['Ext.direct.*']
 }, function() {
-    var Loader = Ext.Loader,
-        wasLoading = Loader.isLoading;
+    var Loader = Ext.Loader;
 
     //Loading API
-    Loader.loadScriptFile('http://localhost:3000/directapi', Ext.emptyFn, Ext.emptyFn, null, true);
-    Loader.isLoading = wasLoading;
+    Loader.loadScriptsSync(['http://localhost:3000/directapi']);
+
     /*
      Add provider. Name must match settings on serverside
      */

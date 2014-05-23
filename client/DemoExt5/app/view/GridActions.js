@@ -36,13 +36,20 @@ Ext.define('DemoExtJs.view.GridActions',{
                         icon:'resources/assets/arrow-circle-double-135.png',
                         action:'loadStore'
                     },'->',{
-                        xtype:'trigger',
-                        triggerCls: 'x-form-clear-trigger',
-                        emptyText:'Filter',
-                        onTriggerClick: function(trigger) {
-                            this.reset();
-                            this.fireEvent('filter-reset', trigger);
-                        }
+                        xtype: 'textfield',
+                        itemId: 'filter',
+                        triggers:{
+                            clear: {
+                                cls: 'x-form-clear-trigger',
+                                weight: 1, // controls display order
+                                hideOnReadOnly: false, //always visible
+                                handler: function(trigger) {
+                                    trigger.reset();
+                                    this.fireEvent('reset', trigger);
+                                }
+                            }
+                        },
+                        emptyText:'Filter'
                     },{
                         xtype:'button',
                         action:'filterStore',
