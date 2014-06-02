@@ -37,13 +37,13 @@ Ext.define('DemoExtJs.controller.Main', {
             case 'insertRecord': this.onInsertBtnClick(); break;
             case 'updateRecord': this.onUpdateBtnClick(); break;
             case 'removeRecord': this.onRemoveBtnClick(); break;
-            case 'loadStore': this.laodStore(); break;
+            case 'loadStore': this.loadStore(); break;
             case 'filterStore': this.filterStore(); break;
             default: break;
         }
     },
 
-    laodStore:function(){
+    loadStore:function(){
         this.getTodoGrid().getStore().reload();
     },
 
