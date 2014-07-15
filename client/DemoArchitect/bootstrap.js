@@ -27,17 +27,13 @@ Ext.Loader.addClassPathMappings({
   "ExtThemeNeptune.toolbar.Toolbar": "ext/ext-theme-neptune.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
-  "DemoArchitect.Application": [],
   "DemoArchitect.DirectAPI": [],
-  "DemoArchitect.controller.Main": [],
   "DemoArchitect.controller.Tasks": [],
   "DemoArchitect.model.Task": [],
   "DemoArchitect.store.Priorities": [],
   "DemoArchitect.store.Tasks": [],
-  "DemoArchitect.view.Main": [],
   "DemoArchitect.view.MainView": [],
   "DemoArchitect.view.TaskForm": [],
-  "DemoArchitect.view.Viewport": [],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
   "Ext.AbstractPlugin": [],
@@ -439,6 +435,7 @@ Ext.ClassManager.addNameAlternateMappings({
   ],
   "Ext.grid.RowEditor": [],
   "Ext.grid.RowEditorButtons": [],
+  "Ext.grid.Scroller": [],
   "Ext.grid.View": [],
   "Ext.grid.ViewDropZone": [],
   "Ext.grid.column.Action": [
@@ -872,23 +869,17 @@ Ext.ClassManager.addNameAlternateMappings({
   "ExtThemeNeptune.toolbar.Toolbar": []
 });
 Ext.ClassManager.addNameAliasMappings({
-  "DemoArchitect.Application": [],
   "DemoArchitect.DirectAPI": [],
-  "DemoArchitect.controller.Main": [],
   "DemoArchitect.controller.Tasks": [],
   "DemoArchitect.model.Task": [
     "model.task"
   ],
   "DemoArchitect.store.Priorities": [],
   "DemoArchitect.store.Tasks": [],
-  "DemoArchitect.view.Main": [
-    "widget.app-main"
-  ],
   "DemoArchitect.view.MainView": [],
   "DemoArchitect.view.TaskForm": [
     "widget.taskform"
   ],
-  "DemoArchitect.view.Viewport": [],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
   "Ext.AbstractPlugin": [],
@@ -1324,6 +1315,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.grid.RowEditorButtons": [
     "widget.roweditorbuttons"
   ],
+  "Ext.grid.Scroller": [],
   "Ext.grid.View": [
     "widget.gridview"
   ],

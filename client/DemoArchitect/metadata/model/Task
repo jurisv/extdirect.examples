@@ -19,6 +19,7 @@
             },
             "codeClass": null,
             "userConfig": {
+                "mapping": null,
                 "name": "id",
                 "type": "int"
             },

@@ -4,7 +4,7 @@ Ext.define('DemoExtJs.model.TodoItem', {
     fields: [
         {
             name: 'id'
-            //,mapping: '_id'  // IMPORTANT! Add for MongoDb backend example
+            ,mapping: '_id'  // IMPORTANT! Add for MongoDb backend example
         },
         {
             name: 'text'
