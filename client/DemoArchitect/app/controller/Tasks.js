@@ -32,7 +32,6 @@ Ext.define('DemoArchitect.controller.Tasks', {
     ],
 
     view: function(target, record) {
-
         var details = this.getDetailsPanel(),	// Get detail panel via controller ref
         	toolbar = this.getDetailsToolbar();	// Get detail panel toolbar via controller ref
 
@@ -41,93 +40,104 @@ Ext.define('DemoArchitect.controller.Tasks', {
 
         // Show toolbar
         toolbar.show();
-
     },
 
     add: function(target) {
-        var record = Ext.create('DemoArchitect.model.Task', {dueDate: new Date()}); //insert record with date
-        record.save({
-            callback:function(records, operation, success){
-                //we add to store only after successful insertion at the server-side
-                if(success){
-                    Ext.getStore('Tasks').add(records);
-
-                    var formWindow = Ext.create('widget.taskform'),	// Create new form window
-                        form = formWindow.down('form').getForm();	// Get form within window
-                        //model = Ext.create('model.task');		// Create new Task model
+        var record = Ext.create('DemoArchitect.model.Task', {dueDate: new Date()}), //create record with date
+            win = Ext.create('widget.taskform'),	// Create new form window
+            form = win.down('form').getForm();	// Get form within window
 
         // Associate model with form
-                    form.loadRecord(record);
+        form.loadRecord(record);
+        win.setTitle('Add New Task');
+
+        win.isNewRecord = true;
 
         // Show window
-                    formWindow.show();
-
-                }else{
-                    console.log('Failure to add record: ', arguments);
-                }
-            }
-        });
+        win.show();
     },
 
     edit: function(target) {
+        var grid = Ext.ComponentQuery.query('gridpanel')[0],    // grid
+            record = grid.getSelectionModel().getSelection()[0],// Get current task
+            win = Ext.create('widget.taskform'),				// Create new form window
+            form = win.down('form').getForm();			// Get form within window
 
-        var data = target.up('panel').data,						// Get panel's assosiated data
-        	store = this.getTasksStore(),						// Get Tasks store
-        	task = store.getById(data.id),						// Get current task
-            formWindow = Ext.create('widget.taskform'),			// Create new form window
-        	form = formWindow.down('form').getForm();			// Get form within window
+
+        //prevent editing if record not selected
+        if(!record){
+            return false;
+        }
 
         // Load task model into form
-        form.loadRecord(task);
+        form.loadRecord(record);
+
 
         // Show window
-        formWindow.show();
+        win.show();
 
+        win.setTitle('Edit Task: ' + record.get('title'));
+
+        win.isNewRecord = false;
     },
 
     save: function(target) {
-        var form = target.up('form').getForm(),			// Get parent form
-            formWindow = target.up('window'),			// Get parent window
-            detailsPanel = this.getDetailsPanel(),		// Get details panel
-            task = form.getRecord(),					// Get task associated with form
-            store = this.getTasksStore();				// Get Records store
-
+        var me = this,
+            record,
+            form = target.up('form').getForm(),			// Get parent form
+            win = target.up('window'),           // Get parent window
+            store = Ext.getStore('Tasks'),
+            grid = Ext.ComponentQuery.query('gridpanel')[0],
+            detailsPanel = me.getDetailsPanel(),
+            detailsToolbar = me.getDetailsToolbar();	// Get details panel toolbar
 
         // Update associated task with form values
         var errors = form.updateRecord();
 
-        // Valid
+        //validate Form
         if (form.isValid()) {
 
-            var record = form.getRecord();
-            form.updateRecord(record);
+            record = form.getRecord();
+            //form.updateRecord(record);
 
             record.save({
-                success: function(record, operation) {
-                    record.commit(); // ##Juris :: Commit record in the store
-                    console.log('success', record, operation);
-                    // update form from computed remote record
-                    form.loadRecord(record);
-                    // Update detail panel
-                    detailsPanel.update(task.getData());
-                    formWindow.destroy();
-                },
-                failure: function(record, operation) {
-                    var exception = operation.getError();
-                    if (exception && exception.errors) form.markInvalid(exception.errors);
-                    console.log('failure', record, operation, exception);
-                    formWindow.destroy();
-                },
-                scope: this
+                callback:function(records, operation, success){
+
+                    if(success){
+                        record.commit(); // ##Juris :: Commit record in the store
+                        if(win.isNewRecord){
+
+                            //insert action
+                            store.add(records);
+
+                            //focus and select newly addded record
+                            grid.getSelectionModel().select(records);
+
+                            Ext.Msg.alert('Success', 'New task added');
+                        }else{
+                            //update action
+                            Ext.Msg.alert('Success', 'Task successfully updated');
+                        }
+                        win.destroy();
+
+                        // Update detail panel
+                        detailsPanel.update(record.getData());
+
+                        //show toolbar
+                        detailsToolbar.show();
+                    }else{
+                        var exception = operation.getError();
+                        if (exception && exception.errors) {
+                            form.markInvalid(exception.errors);
+                        }
+                        console.log('failure', record, operation, exception);
+                        win.destroy();
+                    }
+                }
             });
-        }
-
-        // Invalid
-        else {
-
+        }else{
             // Show errors on form
             form.markInvalid(errors);
-
         }
     },
 
@@ -148,38 +158,31 @@ Ext.define('DemoArchitect.controller.Tasks', {
             // User confirmed yes
             if (btn == 'yes') {
 
-                var data = target.up('panel').data,				// Get assosiated data
-                    store = me.getTasksStore(),					// Get tasks store
-                    record =
-                    task = store.getById(data.id),				// Get current task
+                var store = me.getTasksStore(),					// Get tasks store
+                    grid = Ext.ComponentQuery.query('gridpanel')[0], // grid
+                    record = grid.getSelectionModel().getSelection()[0],
                     detailsPanel = me.getDetailsPanel(),		// Get details panel
                     detailsToolbar = me.getDetailsToolbar();	// Get details panel toolbar
 
+                store.remove(record);
 
-
-                task.destroy({
-                    callback:function(records, operation){
+                record.destroy({
+                    callback: function(records, operation){
                         var success = operation.wasSuccessful();
 
                         if(success){
-                            store.remove(task);
-                            // Clear panel content
-                            detailsPanel.update(null);
-
-                            // Hide toolbar
-                            detailsToolbar.hide();
-
                             console.log('Sucessfully removed record: ', arguments);
+                            Ext.Msg.alert('Success', 'Record removed sucessfully');
                         }else{
-                            //store.insert(task.index, task);
+                            store.insert(record.index, record);
                             console.log('Failure to remove record: ', arguments);
                             Ext.Msg.alert('Server side Error', 'Unable to remove the record');
                         }
+
+                        detailsToolbar.hide();
+                        detailsPanel.update(null);
                     }
                 });
-
-
-
             }
         });
     },

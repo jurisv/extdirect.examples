@@ -21,7 +21,7 @@
             "userConfig": {
                 "mapping": null,
                 "name": "id",
-                "type": "int"
+                "type": null
             },
             "designerId": "f1e46f0b-b766-478e-8e20-20fbc76c2f73"
         },

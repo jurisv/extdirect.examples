@@ -26,8 +26,7 @@ Ext.define('DemoArchitect.model.Task', {
 
     fields: [
         {
-            name: 'id',
-            type: 'int'
+            name: 'id'
         },
         {
             name: 'title'

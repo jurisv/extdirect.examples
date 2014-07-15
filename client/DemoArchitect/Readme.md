@@ -1,34 +1,5 @@
-# DemoArchitect/app
+# Database selection
 
-This folder contains the javascript files for the application.
+Provided Example out of the box works with MySQL(node-server/extdirect-mysql) database serverside.
 
-# DemoArchitect/resources
-
-This folder contains static resources (typically an `"images"` folder as well).
-
-# DemoArchitect/overrides
-
-This folder contains override classes. All overrides in this folder will be 
-automatically included in application builds if the target class of the override
-is loaded.
-
-# DemoArchitect/sass/etc
-
-This folder contains misc. support code for sass builds (global functions, 
-mixins, etc.)
-
-# DemoArchitect/sass/src
-
-This folder contains sass files defining css rules corresponding to classes
-included in the application's javascript code build.  By default, files in this 
-folder are mapped to the application's root namespace, 'DemoArchitect'. The
-namespace to which files in this directory are matched is controlled by the
-app.sass.namespace property in DemoArchitect/.sencha/app/sencha.cfg. 
-
-# DemoArchitect/sass/var
-
-This folder contains sass files defining sass variables corresponding to classes
-included in the application's javascript code build.  By default, files in this 
-folder are mapped to the application's root namespace, 'DemoArchitect'. The
-namespace to which files in this directory are matched is controlled by the
-app.sass.namespace property in DemoArchitect/.sencha/app/sencha.cfg. 
+To change backend to consume Mongo Db(node-server/extdirect-mongodb), you have to change Task model and add mapping '_id' to field 'id'!
