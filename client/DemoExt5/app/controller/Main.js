@@ -91,7 +91,7 @@ Ext.define('DemoExtJs.controller.Main', {
 
             store.remove(record);
 
-            record.destroy({
+            record.erase({
                 callback:function(records, operation){
                     var success = operation.wasSuccessful();
                     form.reset();
