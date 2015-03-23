@@ -2,7 +2,5 @@ node-server/extdirect-mongodb/.idea
 node-server/extdirect-mongodb/node_modules
 npm-debug.log
 node-server/extdirect-mongodb/public
-
-
-
-
+client/DemoExt5/ext
+client/ExtJs/ext
