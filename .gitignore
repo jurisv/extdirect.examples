@@ -3,8 +3,6 @@ node-server/extdirect-mysql/node_modules
 npm-debug.log
 node-server/extdirect-mongodb/public
 node-server/extdirect-mysql/public
-client/DemoExt5/ext
-client/ExtJs/ext
 .idea
 .sass-cache
-client/DemoExt5/build
+temp
