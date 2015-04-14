@@ -1,7 +1,7 @@
 # Upgrade in progress!
 Upgraded examples should be in place this week. If you are looking for older versions and want to get started right away, please refer to the '_old' folder
 
-Once upgradde is completed I will remove this message.
+I will remove this message once upgrade is completed.
 
 ### About
 This repository contains examples on how to use Ext.Direct in conjunction with node.js server side
