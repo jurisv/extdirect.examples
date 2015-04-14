@@ -1,0 +1,19 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "models": [
+            "Task"
+        ],
+        "name": "TaskList",
+        "views": [
+            "Tasks"
+        ]
+    },
+    "name": "Application",
+    "designerId": "application"
+}

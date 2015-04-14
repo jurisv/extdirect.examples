@@ -1,0 +1,55 @@
+{
+    "name": "TaskList",
+    "settings": {
+        "cmd": {
+            "license": "gpl",
+            "cmdVersion": "5.1.2.52",
+            "frameworkVersion": "5.1.0.107"
+        },
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Auto Expand",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            }
+        },
+        "urlPrefix": "http://localhost:1841",
+        "exportPath": "",
+        "lockUrlPrefix": true,
+        "buildShouldOverwriteIndex": true,
+        "generateArchitectVersion": true,
+        "spacesToIndent": 4,
+        "lineEnding": "LF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "installStatus": "Not Installed",
+        "sdkPath": "",
+        "projectHasEnabledWebServer": true
+    },
+    "xdsVersion": "3.2.0",
+    "xdsBuild": 75,
+    "schemaVersion": 1,
+    "upgradeVersion": 310000000001,
+    "framework": "ext51",
+    "viewOrderMap": {
+        "view": [
+            "f1dd9304-a4aa-4ce2-afd6-4d9266edd4ad",
+            "a5fc9637-ffb1-40d1-9d30-8126142ce9aa",
+            "5184da98-acf5-4641-8f07-3775610a92cd"
+        ],
+        "store": [],
+        "controller": [],
+        "model": [
+            "3b278091-bbd1-4471-9384-2594bdf50300"
+        ],
+        "resource": [
+            "5f6d6b61-9450-408a-ad81-729fab7af2c7",
+            "55b779e3-08a1-4b31-b3f8-9a33b5af3b49",
+            "6993df56-92b2-4377-aba7-9951f27ca6f1"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}
