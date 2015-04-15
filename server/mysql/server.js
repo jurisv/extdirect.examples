@@ -1,58 +1,65 @@
-//Set up common namespace for the application
-//As this is the global namespace, it will be available across all modules
-if(!global['App']){
+//Add App to global namespace. We wil store any global variables we would like to be accessible from other modules
+
+if(!global['App']) {
     global.App = {};
 }
 
 var express = require('express'),
-    nconf = require('nconf'),
-    http = require('http'),
     path = require('path'),
 
-    extdirect = require('extdirect'),
-    db = require('./server-db');
+    direct = require('extdirect'),
+    db = require('./server-db'),
 
-nconf.env().file({ file: 'server-config.json'});
+    serverConfig = require('./server-config'),
+    directConfig = require('./direct-config');
 
-var ServerConfig = nconf.get("ServerConfig"),
-    ExtDirectConfig = nconf.get("ExtDirectConfig");
+//Middleware
+var favicon = require('serve-favicon'),
+    logger = require('morgan'),
+    methodOverride = require('method-override'),
+    cookieParser = require('cookie-parser'),
+    compression = require('compression'),
+    session = require('express-session'),
+    bodyParser = require('body-parser'),
+    multer = require('multer'),
+    errorHandler = require('errorhandler');
 
 var app = express();
 
-if(ServerConfig.enableSessions){
-    //memory store for sessions - change to different storage here to match your implementation.
-    var store  = new express.session.MemoryStore;
+//Configure
+app.set('port', process.env.PORT || serverConfig.port);
+
+app.use(favicon(__dirname + serverConfig.webRoot + '/favicon.ico'));
+
+app.use(logger(serverConfig.logger));
+
+app.use(methodOverride());
+
+if(serverConfig.enableSessions) {
+    app.use(cookieParser());
+    app.use(session({
+        resave: false,
+        saveUninitialized: true,
+        secret: serverConfig.sessionSecret
+    }));
 }
 
-app.configure(function(){
+if(serverConfig.enableCompression) {
+    app.use(compression()); //Performance - we tell express to use Gzip compression
+}
 
-    app.set('port', process.env.PORT || ServerConfig.port);
-    app.use(express.logger(ServerConfig.logger));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-    if(ServerConfig.enableUpload){
-        app.use(express.bodyParser({uploadDir:ServerConfig.fileUploadFolder})); //take care of body parsing/multipart/files
-    }
-
-    app.use(express.methodOverride());
-
-    if(ServerConfig.enableCompression){
-        app.use(express.compress()); //Performance - we tell express to use Gzip compression
-    }
-
-    if(ServerConfig.enableSessions){
-        //Required for session
-        app.use(express.cookieParser());
-        app.use(express.session({ secret: ServerConfig.sessionSecret, store: store }));
-    }
-
-    app.use(express.static(path.join(__dirname, ServerConfig.webRoot)));
-});
+if(serverConfig.enableUpload) {
+    app.use(multer({dest: serverConfig.fileUploadFolder}));
+}
+app.use(express.static(path.join(__dirname, serverConfig.webRoot)));
 
 //CORS Supports
-if(ServerConfig.enableCORS){
+if(serverConfig.enableCORS){
 
     app.use( function(req, res, next) {
-        var ac = ServerConfig.AccessControl;
+        var ac = serverConfig.AccessControl;
         res.header('Access-Control-Allow-Origin', ac.AllowOrigin); // allowed hosts
         res.header('Access-Control-Allow-Methods', ac.AllowMethods); // what methods should be allowed
         res.header('Access-Control-Allow-Headers', ac.AllowHeaders); //specify headers
@@ -68,38 +75,41 @@ if(ServerConfig.enableCORS){
     });
 }
 
+//Warm up Direct
+var directApi = direct.initApi(directConfig);
+var directRouter = direct.initRouter(directConfig);
+
+//Routes
 //GET method returns API
-app.get(ExtDirectConfig.apiUrl, function(request, response) {
+app.get(directConfig.apiUrl, function(req, res) {
     try{
-        var api = extdirect.getAPI(ExtDirectConfig);
-        response.writeHead(200, {'Content-Type': 'application/json'});
-        response.end(api);
+        directApi.getAPI(
+            function(api){
+                res.writeHead(200, {'Content-Type': 'application/json'});
+                res.end(api);
+            }
+        );
     }catch(e){
         console.log(e);
     }
 });
 
 // Ignoring any GET requests on class path
-app.get(ExtDirectConfig.classPath, function(request, response) {
-    response.writeHead(200, {'Content-Type': 'application/json'});
-    response.end(JSON.stringify({success:false, msg:'Unsupported method. Use POST instead.'}));
+app.get(directConfig.classPath, function(req, res) {
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.end(JSON.stringify({success:false, msg:'Unsupported method. Use POST instead.'}));
 });
 
 // POST request process route and calls class
-app.post(ExtDirectConfig.classPath, function(request, response) {
-    extdirect.processRoute(request, response, ExtDirectConfig);
+app.post(directConfig.classPath, function(req, res) {
+    directRouter.processRoute(req, res);
 });
 
-app.configure('development', function(){
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-    global.App.mode = 'development';
-});
+//Dev
+if (app.get('env' == 'development')) {
+    app.use(errorHandler({ dumpExceptions: true, showStack: true }));
+}
 
-app.configure('production', function(){
-    app.use(express.errorHandler());
-    global.App.mode = 'production';
-});
-
-http.createServer(app).listen(app.get('port'), function(){
+app.listen(app.get('port'), function(){
     console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 });

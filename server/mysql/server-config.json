@@ -1,34 +1,18 @@
 {
-    "ServerConfig": {
-        "port": 3000,
-        "logger": "dev",
-        "enableUpload": true,
-        "enableCompression": true,
-        "webRoot": "/public",
-        "fileUploadFolder": "./uploads",
-        "enableSessions": true,
-        "sessionSecret": "vdW3F6y3506h",
-        "enableCORS": true,
-        "AccessControl": {
-            "AllowOrigin": "*",
-            "AllowMethods": "GET,PUT,POST,DELETE,OPTIONS",
-            "AllowHeaders": "Origin, X-Requested-With, Content-Type, Accept",
-            "AllowCredentials": true,
-            "MaxAge": 3600
-        }
-    },
-
-    "ExtDirectConfig": {
-        "version2": true,
-        "remoteNamespacePrefix": "DX",
-        "namespaces": ["Auth", "Demo"],
-        "apiName": "REMOTING_API",
-        "apiUrl": "/directapi",
-        "classPath": "/direct",
-        "server": "localhost",
-        "port": "3000",
-        "protocol": "http",
-        "relativeUrl": false,
-        "appendRequestResponseObjects": true
+    "port": 3000,
+    "logger": "dev",
+    "enableUpload": true,
+    "enableCompression": true,
+    "webRoot": "/public",
+    "fileUploadFolder": "./uploads",
+    "enableSessions": true,
+    "sessionSecret": "vdW3F6y3506h",
+    "enableCORS": true,
+    "AccessControl": {
+        "AllowOrigin": "*",
+        "AllowMethods": "GET,PUT,POST,DELETE,OPTIONS",
+        "AllowHeaders": "Origin, X-Requested-With, Content-Type, Accept",
+        "AllowCredentials": true,
+        "MaxAge": 3600
     }
 }

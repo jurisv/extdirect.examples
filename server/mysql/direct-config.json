@@ -1,0 +1,16 @@
+{
+    "rootNamespace": "Ext.app",
+    "nestedNamespaces": ["Auth", "Demo"],
+    "apiName": "REMOTING_API",
+    "apiUrl": "/directapi",
+    "classPath": "/direct",
+    "server": "localhost",
+    "port": "3000",
+    "protocol": "http",
+    "timeout": 30000,
+    "cacheAPI": false,
+    "relativeUrl": false,
+    "appendRequestResponseObjects": true,
+    "enableMetadata": true,
+    "databaseAutoConnection": true
+}
