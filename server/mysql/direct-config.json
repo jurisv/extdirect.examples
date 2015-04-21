@@ -3,6 +3,7 @@
     "nestedNamespaces": ["Auth", "Demo"],
     "apiName": "REMOTING_API",
     "apiUrl": "/directapi",
+    "classRouteUrl": "/direct",
     "classPath": "/direct",
     "server": "localhost",
     "port": "3000",

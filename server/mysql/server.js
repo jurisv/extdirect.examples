@@ -95,13 +95,13 @@ app.get(directConfig.apiUrl, function(req, res) {
 });
 
 // Ignoring any GET requests on class path
-app.get(directConfig.classPath, function(req, res) {
+app.get(directConfig.classRouteUrl, function(req, res) {
     res.writeHead(200, {'Content-Type': 'application/json'});
     res.end(JSON.stringify({success:false, msg:'Unsupported method. Use POST instead.'}));
 });
 
 // POST request process route and calls class
-app.post(directConfig.classPath, function(req, res) {
+app.post(directConfig.classRouteUrl, function(req, res) {
     directRouter.processRoute(req, res);
 });
 
