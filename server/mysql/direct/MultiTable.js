@@ -1,25 +1,22 @@
-function MultiTable(metadata){
-    var table = 'todoitem';
-    var db = global.App.database;
+var db = global.App.database;
 
+var MultiTable  = {
+    //callback as last argument is mandatory
+    create: function(params, callback){
+        //@meta table
+    },
 
-    this.create =  function(params, callback){
+    read: function(params, callback){
+        //@meta table
+    },
 
-    };
+    update: function(params, callback){
+        //@meta table
+    },
 
-    this.read =  function(params, callback){
-
-    };
-
-    this.update = function(params, callback){
-
-    };
-
-    this.destroy = function(params, callback){
-
-    };
-}
-
-
+    destroy: function(params, callback){
+        //@meta table
+    }
+};
 
 module.exports = MultiTable;
