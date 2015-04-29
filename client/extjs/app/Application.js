@@ -5,14 +5,32 @@
  */
 Ext.define('Demo.Application', {
     extend: 'Ext.app.Application',
-    
+
     name: 'Demo',
 
-    stores: [
-        // TODO: add global / shared stores here
+    requires:[
+        'Demo.DirectAPI'
     ],
-    
-    launch: function () {
-        // TODO - Launch the application
-    }
+
+    views: [
+        'MethodCall',
+        'FormActions',
+        'GridActions',
+        'FormUpload',
+        'TreeActions',
+        'Cookies'
+    ],
+
+    controllers: [
+        'Main'
+    ],
+
+    models:[
+        'TodoItem'
+    ],
+
+    stores: [
+        'Todo',
+        'Tree'
+    ]
 });

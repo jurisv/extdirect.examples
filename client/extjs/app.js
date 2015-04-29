@@ -7,12 +7,6 @@ Ext.application({
     name: 'Demo',
 
     extend: 'Demo.Application',
-    
-    autoCreateViewport: 'Demo.view.main.Main'
-	
-    //-------------------------------------------------------------------------
-    // Most customizations should be made to Demo.Application. If you need to
-    // customize this file, doing so below this section reduces the likelihood
-    // of merge conflicts when upgrading to new versions of Sencha Cmd.
-    //-------------------------------------------------------------------------
+
+    autoCreateViewport: true
 });

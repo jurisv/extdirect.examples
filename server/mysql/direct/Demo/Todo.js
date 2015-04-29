@@ -7,7 +7,7 @@ var Todo  = {
         delete params['id'];
         conn.query('INSERT INTO ' + table + ' SET ?', params, function(err, result) {
 
-            if (err) db.debugError(callback, err);
+            if (err) db.debug(callback, err);
 
             conn.query('SELECT * FROM '  + table + ' WHERE id = ?', result.insertId, function(err, rows, fields) {
                 db.disconnect(conn); //release connection
@@ -43,7 +43,7 @@ var Todo  = {
         sql = sql + ' LIMIT ' + conn.escape(params.start) + ' , ' + conn.escape(params.limit);
 
         conn.query(sql, function(err, rows, fields) {
-            if (err) db.debugError(callback, err);
+            if (err) db.debug(callback, err);
 
             //get totals for paging
 
@@ -51,7 +51,7 @@ var Todo  = {
 
             conn.query(totalQuery, function(err, rowsTotal, fields) {
                 db.disconnect(conn); //release connection
-                if (err) db.debugError(callback, err);
+                if (err) db.debug(callback, err);
 
                 callback({
                     success: true,
@@ -67,7 +67,7 @@ var Todo  = {
 
         conn.query('UPDATE ' + table + ' SET ? where id = ' + conn.escape(params['id']), params, function(err, result) {
             db.disconnect(conn); //release connection
-            if (err) db.debugError(callback, err);
+            if (err) db.debug(callback, err);
             callback({success:true});
         });
     },
@@ -76,7 +76,7 @@ var Todo  = {
         var conn = db.connect();
 
         conn.query('DELETE FROM ' + table + ' WHERE id = ?', conn.escape(params['id']), function(err, rows, fields) {
-            if (err) db.debugError(callback, err);
+            if (err) db.debug(callback, err);
 
             db.disconnect(conn); //release connection
             callback({
