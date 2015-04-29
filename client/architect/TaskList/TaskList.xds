@@ -2,9 +2,9 @@
     "name": "TaskList",
     "settings": {
         "cmd": {
-            "license": "gpl",
-            "cmdVersion": "5.1.2.52",
-            "frameworkVersion": "5.1.0.107"
+            "license": "",
+            "cmdVersion": "",
+            "frameworkVersion": ""
         },
         "canvasControls": {
             "viewportSize": {
@@ -14,7 +14,7 @@
                 "width": null
             }
         },
-        "urlPrefix": "http://localhost:1841",
+        "urlPrefix": "http://localhost/TaskList/",
         "exportPath": "",
         "lockUrlPrefix": true,
         "buildShouldOverwriteIndex": true,
@@ -44,9 +44,7 @@
             "3b278091-bbd1-4471-9384-2594bdf50300"
         ],
         "resource": [
-            "5f6d6b61-9450-408a-ad81-729fab7af2c7",
-            "55b779e3-08a1-4b31-b3f8-9a33b5af3b49",
-            "6993df56-92b2-4377-aba7-9951f27ca6f1"
+            "5f6d6b61-9450-408a-ad81-729fab7af2c7"
         ],
         "app": [
             "application"
