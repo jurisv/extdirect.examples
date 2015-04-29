@@ -71,7 +71,7 @@ if(serverConfig.enableCORS){
         res.header('Access-Control-Max-Age', ac.MaxAge); //prevents from requesting OPTIONS with every server-side call (value in seconds)
 
         if (req.method === 'OPTIONS') {
-            res.send(204);
+            res.sendStatus(204);
         }
         else {
             next();
