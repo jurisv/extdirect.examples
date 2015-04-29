@@ -81,19 +81,19 @@ function MongoDB(config){
         }
     };
 
-    this.close = function(){
+    this.close = function() {
         this.client.close();
     };
 
-    this.removeCollection = function(collectionName){
+    this.removeCollection = function(collectionName) {
         this.database.dropCollection(collectionName);
     };
 
-    this.debugError = function(fn, error){
+    this.debugError = function(fn, error) {
         // Generate SOFT error, instead of throwing hard error.
         // We send messages with debug ingo only if in development mode
         this.close();
-        if(global.App.mode === 'development'){
+        if(global.App.env === 'development') {
             fn({message: {
                 text: 'Database error',
                 debug: error.toString()
@@ -108,7 +108,7 @@ function MongoDB(config){
         }
     };
 
-    this.authorize = function(method, username, password, fn){
+    this.authorize = function(method, username, password, fn) {
         var me = this;
 
         me.client.open(function(err, cli) {

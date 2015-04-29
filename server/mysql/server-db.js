@@ -1,7 +1,7 @@
 var mysql = require('mysql'),
     cfg = require('./db-config');
 
-function MySQL(config){
+function MySQL(config) {
 
     this.connection = null;
 
@@ -25,15 +25,15 @@ function MySQL(config){
         return this.connection;
     };
 
-    this.disconnect = function(){
+    this.disconnect = function() {
         this.connection.end();
     };
 
-    this.debug = function(fn, error){
+    this.debug = function(fn, error) {
         // Generate SOFT error, instead of throwing hard error.
         // We send messages with debug info only if in development mode
 
-        if(global.App.mode === 'development'){
+        if(global.App.env === 'development') {
             fn({
                 message: {
                     text: 'Database error',

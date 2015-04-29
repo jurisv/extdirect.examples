@@ -110,9 +110,11 @@ app.post(directConfig.classRouteUrl, function(req, res) {
 });
 
 //Dev
-if (app.get('env' == 'development')) {
+if (app.get('env') === 'development') {
     app.use(errorHandler({ dumpExceptions: true, showStack: true }));
 }
+
+global.App.env = app.get('env');
 
 app.listen(app.get('port'), function(){
     console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
