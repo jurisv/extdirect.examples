@@ -1,7 +1,7 @@
 {
-    "rootNamespace": "Ext.app",
+    "rootNamespace": "Server",
     "nestedNamespaces": ["Auth", "Demo"],
-    "apiName": "REMOTING_API",
+    "apiName": "API",
     "apiUrl": "/directapi",
     "classRouteUrl": "/direct",
     "classPath": "/direct",
