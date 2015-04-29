@@ -48,7 +48,11 @@ if(serverConfig.enableCompression) {
     app.use(compression()); //Performance - we tell express to use Gzip compression
 }
 
+// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 if(serverConfig.enableUpload) {
     app.use(multer({dest: serverConfig.fileUploadFolder}));
