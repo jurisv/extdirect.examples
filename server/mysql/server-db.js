@@ -21,6 +21,8 @@ function MySQL(config){
                 process.exit(1);
             }
         });
+
+        return this.connection;
     };
 
     this.disconnect = function(){
