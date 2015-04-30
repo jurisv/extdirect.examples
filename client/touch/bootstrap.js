@@ -36,6 +36,10 @@ Ext.Loader.addClassPathMappings({
 });
 
 Ext.ClassManager.addNameAlternateMappings({
+  "Demo.DirectAPI": [],
+  "Demo.model.TodoItem": [],
+  "Demo.overrides.form.Panel": [],
+  "Demo.store.Todo": [],
   "Demo.view.Main": [],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
@@ -671,6 +675,10 @@ Ext.ClassManager.addNameAlternateMappings({
 });
 
 Ext.ClassManager.addNameAliasMappings({
+  "Demo.DirectAPI": [],
+  "Demo.model.TodoItem": [],
+  "Demo.overrides.form.Panel": [],
+  "Demo.store.Todo": [],
   "Demo.view.Main": [
     "widget.main"
   ],

@@ -14,11 +14,21 @@ Ext.application({
     name: 'Demo',
 
     requires: [
-        'Ext.MessageBox'
+        'Demo.DirectAPI',
+        'Ext.MessageBox',
+        'Demo.overrides.form.Panel'
     ],
 
     views: [
         'Main'
+    ],
+
+    models: [
+        'TodoItem'
+    ],
+
+    stores: [
+        'Todo'
     ],
 
     launch: function() {
