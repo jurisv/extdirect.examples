@@ -16,7 +16,8 @@ Ext.application({
     requires: [
         'Demo.DirectAPI',
         'Ext.MessageBox',
-        'Demo.overrides.form.Panel'
+        'Demo.overrides.form.Panel',
+        'Demo.overrides.direct.RemotingProvider'
     ],
 
     views: [

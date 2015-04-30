@@ -38,6 +38,7 @@ Ext.Loader.addClassPathMappings({
 Ext.ClassManager.addNameAlternateMappings({
   "Demo.DirectAPI": [],
   "Demo.model.TodoItem": [],
+  "Demo.overrides.direct.RemotingProvider": [],
   "Demo.overrides.form.Panel": [],
   "Demo.store.Todo": [],
   "Demo.view.Main": [],
@@ -677,6 +678,7 @@ Ext.ClassManager.addNameAlternateMappings({
 Ext.ClassManager.addNameAliasMappings({
   "Demo.DirectAPI": [],
   "Demo.model.TodoItem": [],
+  "Demo.overrides.direct.RemotingProvider": [],
   "Demo.overrides.form.Panel": [],
   "Demo.store.Todo": [],
   "Demo.view.Main": [
