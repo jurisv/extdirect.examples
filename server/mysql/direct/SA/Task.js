@@ -1,7 +1,7 @@
-var table = 'todoitem';
+var table = 'satask'; //Sencha Architect
 var db = global.App.database;
 
-var Todo  = {
+var Task  = {
     create: function(params, callback){
         var conn = db.connect();
         delete params['id'];
@@ -67,8 +67,7 @@ var Todo  = {
 
         conn.query('UPDATE ' + table + ' SET ? where id = ' + conn.escape(params['id']), params, function(err, result) {
             if (err) db.debug(callback, err);
-
-            db.disconnect(conn); //release connection
+            db.disconnect(conn); //release connection // TODO: breaks.
 
             callback({success:true});
         });
@@ -89,4 +88,4 @@ var Todo  = {
     }
 };
 
-module.exports = Todo;
+module.exports = Task;

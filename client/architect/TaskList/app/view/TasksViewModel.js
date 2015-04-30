@@ -19,166 +19,29 @@ Ext.define('TaskList.view.TasksViewModel', {
 
     requires: [
         'Ext.data.Store',
-        'Ext.data.proxy.Direct'
+        'Ext.data.proxy.Direct',
+        'TaskList.DirectAPI',
+        'Ext.data.reader.Json'
     ],
 
     stores: {
         tasks: {
+            autoLoad: true,
+            autoSync: true,
             model: 'TaskList.model.Task',
-            data: [
-                {
-                    id: 761,
-                    description: 'Schedule changes as required',
-                    dueDate: '1\/8\/2011',
-                    priority: 'High',
-                    details: '<B>aliquam<\/b> et.<U><b>iste<\/b><\/u> architecto harum vel eum.',
-                    createdAt: '2\/18\/2008',
-                    updatedAt: '6\/26\/2001',
-                    assignedTo: 'hdiaz'
-                },
-                {
-                    id: 892,
-                    description: 'Identify event sources by resource type.',
-                    dueDate: '2\/13\/2011',
-                    priority: 'Normal',
-                    details: '<U><u>aut<\/u><\/u> et quibusdam minima fuga.',
-                    createdAt: '11\/10\/2011',
-                    updatedAt: '10\/16\/2003',
-                    assignedTo: 'jtucker'
-                },
-                {
-                    id: 13,
-                    description: 'Create databases on the history server.',
-                    dueDate: '8\/28\/2011',
-                    priority: 'Normal',
-                    details: '<B>sed<\/b> quia nobis.',
-                    createdAt: '10\/25\/2014',
-                    updatedAt: '1\/16\/2011',
-                    assignedTo: 'hdiaz'
-                },
-                {
-                    id: 838,
-                    description: 'Monitor system performance and adjust hardware as required',
-                    dueDate: '11\/12\/2009',
-                    priority: 'Low',
-                    details: '<B>pariatur<\/b> assumenda.',
-                    createdAt: '12\/1\/2010',
-                    updatedAt: '1\/17\/2006',
-                    assignedTo: 'ryoung'
-                },
-                {
-                    id: 164,
-                    description: 'Database backup and maintenance',
-                    dueDate: '7\/13\/2013',
-                    priority: 'Low',
-                    details: '<B><b>eum<\/b><\/b> et.',
-                    createdAt: '12\/3\/2012',
-                    updatedAt: '8\/22\/2010',
-                    assignedTo: 'jallen'
-                },
-                {
-                    id: 576,
-                    description: 'Evaluate the addition and deletion of user IDs',
-                    dueDate: '3\/11\/2002',
-                    priority: 'High',
-                    details: 'Eveniet labore animi et.',
-                    createdAt: '12\/7\/2003',
-                    updatedAt: '3\/26\/2014',
-                    assignedTo: 'bflores'
-                },
-                {
-                    id: 939,
-                    description: 'Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius.',
-                    dueDate: '4\/28\/2009',
-                    priority: 'Normal',
-                    details: 'Sed dolorum.',
-                    createdAt: '10\/6\/2014',
-                    updatedAt: '6\/23\/2005',
-                    assignedTo: 'jparker'
-                },
-                {
-                    id: 625,
-                    description: 'Extend the data model',
-                    dueDate: '11\/14\/2009',
-                    priority: 'High',
-                    details: '<U><b>necessitatibus<\/b><\/u> est.',
-                    createdAt: '12\/8\/2004',
-                    updatedAt: '2\/24\/2013',
-                    assignedTo: 'mwest'
-                },
-                {
-                    id: 717,
-                    description: 'Test the Automated Business Systems file',
-                    dueDate: '4\/11\/2001',
-                    priority: 'Normal',
-                    details: '<U><b>esse<\/b><\/u> et enim.Quis aliquam fugiat.',
-                    createdAt: '1\/10\/2012',
-                    updatedAt: '5\/4\/2001',
-                    assignedTo: 'speterson'
-                },
-                {
-                    id: 246,
-                    description: 'Configure the event source for additional testing',
-                    dueDate: '5\/14\/2009',
-                    priority: 'Normal',
-                    details: '<U><u>odit<\/u><\/u> quos ea praesentium.',
-                    createdAt: '8\/1\/2005',
-                    updatedAt: '4\/25\/2004',
-                    assignedTo: 'mgilbert'
-                },
-                {
-                    id: 355,
-                    description: 'Create the automated business Systems configuration file',
-                    dueDate: '6\/15\/2003',
-                    priority: 'Low',
-                    details: '<U>laborum<\/u> repellendus.',
-                    createdAt: '7\/24\/2012',
-                    updatedAt: '4\/6\/2009',
-                    assignedTo: 'dpalmer'
-                },
-                {
-                    id: 276,
-                    description: 'Install event enablement on the console server',
-                    dueDate: '11\/23\/2003',
-                    priority: 'High',
-                    details: '<U><u>beatae<\/u><\/u> soluta adipisci atque reiciendis.',
-                    createdAt: '10\/22\/2002',
-                    updatedAt: '5\/18\/2014',
-                    assignedTo: 'cgreen'
-                },
-                {
-                    id: 997,
-                    description: 'Configure filtering, if appropriate for systems',
-                    dueDate: '9\/27\/2005',
-                    priority: 'Low',
-                    details: 'Explicabo ut.<U><b>saepe<\/b><\/u> qui reprehenderit ea quam',
-                    createdAt: '4\/18\/2010',
-                    updatedAt: '7\/8\/2004',
-                    assignedTo: 'wfisher'
-                },
-                {
-                    id: 792,
-                    description: 'Associate tasks and URLs with object types',
-                    dueDate: '12\/18\/2010',
-                    priority: 'High',
-                    details: '<U><b><b>quis<\/b><\/b><\/u> ex enim et.',
-                    createdAt: '10\/23\/2006',
-                    updatedAt: '9\/11\/2009',
-                    assignedTo: 'scastillo'
-                },
-                {
-                    id: 767,
-                    description: 'Create configuration level objects for the test server',
-                    dueDate: '9\/17\/2006',
-                    priority: 'Normal',
-                    details: '<B>temporibus<\/b> aut est voluptatem tenetur.',
-                    createdAt: '7\/17\/2003',
-                    updatedAt: '10\/8\/2012',
-                    assignedTo: 'tgreene'
-                }
-            ],
             proxy: {
-                type: 'direct'
+                type: 'direct',
+                api: {
+                    create: 'Server.SA.Task.create',
+                    read: 'Server.SA.Task.read',
+                    update: 'Server.SA.Task.update',
+                    destroy: 'Server.SA.Task.destroy'
+                },
+                reader: {
+                    type: 'json',
+                    messageProperty: 'message',
+                    rootProperty: 'data'
+                }
             }
         }
     }

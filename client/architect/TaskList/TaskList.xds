@@ -14,7 +14,7 @@
                 "width": null
             }
         },
-        "urlPrefix": "http://localhost/TaskList/",
+        "urlPrefix": "http://git/extdirect.examples/client/architect/TaskList/",
         "exportPath": "",
         "lockUrlPrefix": true,
         "buildShouldOverwriteIndex": true,
@@ -44,7 +44,8 @@
             "3b278091-bbd1-4471-9384-2594bdf50300"
         ],
         "resource": [
-            "5f6d6b61-9450-408a-ad81-729fab7af2c7"
+            "5f6d6b61-9450-408a-ad81-729fab7af2c7",
+            "a0c04277-8504-47c9-8af1-62649a69a98f"
         ],
         "app": [
             "application"

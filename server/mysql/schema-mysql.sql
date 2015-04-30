@@ -73,3 +73,30 @@ INSERT INTO `todoitem` (`id`, `text`, `complete`) VALUES
   (8, 'Dress up for the meeting', 0),
   (9, 'Check email', 0),
   (10, 'Head to the office', 0);
+
+--
+-- Table structure for table `satodoitem`
+--
+
+CREATE TABLE `satask` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dueDate` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `priority` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `details` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `createdAt` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `updatedAt` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `assignedTo` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Sample table for Sencha Architect 3.2 project' AUTO_INCREMENT=893 ;
+
+--
+-- Dumping data for table `satodoitem`
+--
+
+INSERT INTO `satask` (`id`, `description`, `dueDate`, `priority`, `details`, `createdAt`, `updatedAt`, `assignedTo`) VALUES
+(761, 'Schedule changes as required', '1/8/2011', 'High', '<b>aliquam<\\/b> et.<U><b>iste<\\/b><\\/u> architecto harum vel eum.', '2/18/2008', '6/26/2001', 'hdiaz'),
+(892, 'Identify event sources by resource type.', '2/13/2014', 'Normal', '<U><u>aut<\\/u><\\/u> et quibusdam minima fuga.', '11/10/2011', '10/16/2013', 'jtucker'),
+(24, 'Create databases on the history server.', '8/28/2011', 'Normal', '<b>sed<\\/b> quia nobis.', '10/25/2014', '1/16/2011', 'hdiaz'),
+(838, 'Monitor system performance and adjust hardware as required', '11/12/2009', 'Low', '<b>pariatur<\\/b> assumenda.', '12/1/2010', '1/17/2006', 'ryoung'),
+(164, 'Database backup and maintenance', '7/13/2013', 'Low', '<b>eum<\\/b> et.', '1/3/2012', '8/22/2010', 'jallen');

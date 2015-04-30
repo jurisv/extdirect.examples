@@ -124,6 +124,9 @@ Ext.define('TaskList.view.TasksViewController', {
                 // Delete record from store
                 store.remove(record);
 
+                //Sync with the server
+                // store.sync();
+
                 // Hide display
                 me.showView('selectMessage');
 
