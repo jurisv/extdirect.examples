@@ -19,3 +19,4 @@ There is no exact timeframe, but should land around ExtJS 6 release or earlier.
 
 ### Known issues
 Missing metadata example in ExtJS 5
+MongoDB direct methods are WIP
