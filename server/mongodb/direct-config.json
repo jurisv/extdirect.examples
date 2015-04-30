@@ -1,6 +1,5 @@
 {
     "rootNamespace": "Server",
-    "nestedNamespaces": ["Auth", "Demo"],
     "apiName": "API",
     "apiUrl": "/directapi",
     "classRouteUrl": "/direct",
