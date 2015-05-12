@@ -6,12 +6,11 @@ var Tasks  = {
         mongoDB.execute(function(collection){
                 collection.insert(params, {w:1}, function(err, result) {
                     if (err) {
-                        mongoDB.debugError(callback, err);
+                        mongoDB.debugError(err, callback);
                     }else{
 
                         mongoDB.close();
-                        callback({
-                            success: true,
+                        callback(null, {
                             data: result
                         });
                     }
@@ -22,7 +21,6 @@ var Tasks  = {
 
     read: function(params, callback){
         var response = {
-            success: true,
             data: [],
             total: 0
         };
@@ -62,24 +60,24 @@ var Tasks  = {
         mongoDB.execute(function(collection){
                 collection.count(filter, function(err, count) {
                     if (err) {
-                        mongoDB.debugError(callback, err);
+                        mongoDB.debugError(err, callback);
                     }else{
                         if(count === 0){
                             if (err) {
-                                mongoDB.debugError(callback, err);
+                                mongoDB.debugError(err, callback);
                             }else{
                                 mongoDB.close();
-                                callback(response);
+                                callback(null, response);
                             }
                         }else{
                             collection.find(filter, options).toArray(function(err, docs) {
                                 if (err) {
-                                    mongoDB.debugError(callback, err);
+                                    mongoDB.debugError(err, callback);
                                 }else{
                                     mongoDB.close();
                                     response.data = docs;
                                     response.total = count;
-                                    callback(response);
+                                    callback(null, response);
                                 }
                             });
                         }
@@ -93,13 +91,11 @@ var Tasks  = {
         mongoDB.execute(function(collection){
                 collection.update({_id: mongoDB.getId(params.id)}, params, {upsert: true, w: 1}, function(err, result) {
                     if (err) {
-                        mongoDB.debugError(callback, err);
+                        mongoDB.debugError(err, callback);
                     }else{
 
                         mongoDB.close();
-                        callback({
-                            success: true
-                        });
+                        callback();
                     }
                 });
             }, collectionName
@@ -110,11 +106,11 @@ var Tasks  = {
         mongoDB.execute(function(collection){
                 collection.remove({_id: mongoDB.getId(params.id)}, {w:1}, function(err, numberOfRemovedDocs) {
                     if (err) {
-                        mongoDB.debugError(callback, err);
+                        mongoDB.debugError(err, callback);
                     }else{
 
                         mongoDB.close();
-                        callback({
+                        callback(null, {
                             success: numberOfRemovedDocs === 1,
                             id: params.id
                         });

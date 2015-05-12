@@ -26,8 +26,7 @@ var Login  = {
         /*
          Some code here to check login
          */
-        callback({
-            success: true,
+        callback(null, {
             message: 'Login successful',
             data: {
                 firstName: 'Juris',

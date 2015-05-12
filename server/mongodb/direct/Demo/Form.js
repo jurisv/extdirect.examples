@@ -1,41 +1,35 @@
 var Form = {
-    testMe: function(params, callback){
-        callback({
-            success:true,
-            msg:'Hello world',
+    testMe: function(params, callback) {
+        callback(null, {
+            randomNumber: 20,
+            msg: 'Hello world',
             params: params
         });
     },
 
-    testException: function(params, callback){
-        failedHere; // explicit typo!
-        callback({
-            success:true
-        });
+    testException: function(params, callback) {
+        throw {message: 'Error captured'};
     },
 
-
-    load: function(params, callback){
-        callback({
-            success:true,
-            data:{
-                firstname:'John',
+    load: function(params, callback) {
+        callback(null, {
+            data: {
+                firstname: 'John',
                 lastname: 'Smith',
                 email: 'john.smith@comapny.info'
             }
         });
     },
 
-    submit: function(params,  callback){
+    submit: function(params,  callback) {
         //@formHandler
-        callback({
-            success:true,
+        callback(null, {
             msg: 'User data updated',
-            params:params
+            params: params
         });
     },
 
-    filesubmit: function(params, callback, sessionID, request, response){
+    filesubmit: function(params, callback, sessionID, request, response) {
         //@formHandler
         var files = request.files; //get files from request object
         // console.log(params, files)
@@ -48,11 +42,11 @@ var Form = {
         // set where the file should actually exists - in this case it is in the "demo" directory
         var target_path = './public/uploaded_images/' + file.name;
 
-        var successfulUpload = function(cb){
+        var successfulUpload = function(cb) {
 
         };
 
-        var failedUpload = function(cd, error){
+        var failedUpload = function(cd, error) {
 
         };
 
@@ -62,17 +56,16 @@ var Form = {
             try{
                 fs.rename(tmp_path, target_path, function(err) {
                     if(err){
+
                         callback({
-                            success: false,
-                            msg: "Upload failed - can't rename the file",
-                            errors: err.message
+                            errors: err.message,
+                            message: "Upload failed - can't rename the file"
                         });
                     }
                     // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
                     fs.unlink(tmp_path, function() {
-                        callback({
-                            success: true,
-                            msg: 'Uploaded successfully',
+                        callback(null, {
+                            message: 'Uploaded successfully',
                             size: file.size,
                             name: file.name
                         });
@@ -80,15 +73,14 @@ var Form = {
                 });
             }catch(e) {
 //                callback({
-//                    success: false,
-//                    msg: "Upload failed - can't rename the file",
-//                    errors: e.message
+//                    errors: err.message,
+//                    message: "Upload failed - can't rename the file"
 //                });
             }
         }else{
             callback({
-                success: false,
-                msg: "Upload failed - empty file",
+                //success: false, // will be set to false automatically as we have configured our server with responseHelper: true
+                message: "Upload failed - empty file",
                 params: params,
                 errors: {
                     clientCode: "File not found",

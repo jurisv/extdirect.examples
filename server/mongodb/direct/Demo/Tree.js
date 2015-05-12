@@ -24,7 +24,7 @@ var Tree = {
             }
         }
 
-        callback(out);
+        callback(null, out);
     }
 };
 

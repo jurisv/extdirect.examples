@@ -7,12 +7,11 @@ var Tasks  = {
         delete params['id'];
         conn.query('INSERT INTO ' + table + ' SET ?', params, function(err, result) {
 
-            if (err) db.debug(callback, err);
+            if (err) db.debug(err, callback);
 
             conn.query('SELECT * FROM '  + table + ' WHERE id = ?', result.insertId, function(err, rows, fields) {
                 db.disconnect(conn); //release connection
-                callback({
-                    success: true,
+                callback(null, {
                     data: rows[0]
                 });
             });
@@ -43,7 +42,7 @@ var Tasks  = {
         sql = sql + ' LIMIT ' + conn.escape(params.start) + ' , ' + conn.escape(params.limit);
 
         conn.query(sql, function(err, rows, fields) {
-            if (err) db.debug(callback, err);
+            if (err) db.debug(err, callback);
 
             //get totals for paging
 
@@ -51,10 +50,9 @@ var Tasks  = {
 
             conn.query(totalQuery, function(err, rowsTotal, fields) {
                 db.disconnect(conn); //release connection
-                if (err) db.debug(callback, err);
+                if (err) db.debug(err, callback);
 
-                callback({
-                    success: true,
+                callback(null, {
                     data: rows,
                     total: rowsTotal[0].totals
                 });
@@ -67,8 +65,8 @@ var Tasks  = {
 
         conn.query('UPDATE ' + table + ' SET ? where id = ' + conn.escape(params['id']), params, function(err, result) {
             db.disconnect(conn); //release connection
-            if (err) db.debug(callback, err);
-            callback({success:true});
+            if (err) db.debug(err, callback);
+            callback();
         });
     },
 
@@ -76,10 +74,10 @@ var Tasks  = {
         var conn = db.connect();
 
         conn.query('DELETE FROM ' + table + ' WHERE id = ?', conn.escape(params['id']), function(err, rows, fields) {
-            if (err) db.debug(callback, err);
+            if (err) db.debug(err, callback);
 
             db.disconnect(conn); //release connection
-            callback({
+            callback(null, {
                 success:rows.affectedRows === 1, //if row successfully removed, affected row will be equal to 1
                 id:params['id']
             });

@@ -89,18 +89,18 @@ function MongoDB(config){
         this.database.dropCollection(collectionName);
     };
 
-    this.debugError = function(fn, error) {
+    this.debugError = function(error, callback) {
         // Generate SOFT error, instead of throwing hard error.
         // We send messages with debug ingo only if in development mode
         this.close();
         if(global.App.env === 'development') {
-            fn({message: {
+            callback({message: {
                 text: 'Database error',
                 debug: error.toString()
             }
             });
         }else{
-            fn({message: {
+            callback({message: {
                 text: 'Unknown error',
                 debug: null
             }

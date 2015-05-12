@@ -29,19 +29,19 @@ function MySQL(config) {
         this.connection.end();
     };
 
-    this.debug = function(fn, error) {
+    this.debug = function(err, callback) {
         // Generate SOFT error, instead of throwing hard error.
         // We send messages with debug info only if in development mode
 
         if(global.App.env === 'development') {
-            fn({
+            callback({
                 message: {
                     text: 'Database error',
-                    debug: error
+                    debug: err
                 }
             });
         }else{
-            fn({
+            callback({
                 message: {
                     text: 'Unknown error',
                     debug: null
@@ -52,4 +52,4 @@ function MySQL(config) {
 }
 
 global.App.database = new MySQL(cfg);
-//TODO: Router param: autoConnect . Will open db connection at the beginning of router batch and close once it's done
+//TODO: Router param: autoConnect . Will open db connection at the beginning of batch and close once it's done with all requests
