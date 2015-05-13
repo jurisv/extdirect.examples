@@ -6,7 +6,5 @@
 Ext.application({
     name: 'Demo',
 
-    extend: 'Demo.Application',
-
-    autoCreateViewport: true
+    extend: 'Demo.Application'
 });

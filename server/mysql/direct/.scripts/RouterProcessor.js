@@ -1,4 +1,4 @@
-var Rules  = {
+var RouterProcessor  = {
 
     beforeAction: function(action, method, req, res, callback) {
 
@@ -17,4 +17,4 @@ var Rules  = {
     }
 };
 
-module.exports = Rules;
+module.exports = RouterProcessor;

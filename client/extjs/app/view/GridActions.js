@@ -26,7 +26,7 @@ Ext.define('Demo.view.GridActions',{
                         text: 'Insert blank record'
                     },
                     {
-                        text: 'Reload data',
+                        text: 'Load data',
                         icon: 'resources/assets/arrow-circle-double-135.png',
                         action: 'loadStore'
                     },

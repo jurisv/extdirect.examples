@@ -91,7 +91,7 @@ app.get(directConfig.apiUrl, function(req, res) {
             function(api){
                 res.writeHead(200, {'Content-Type': 'application/json'});
                 res.end(api);
-            }
+            }, req, res
         );
     }catch(e){
         console.log(e);

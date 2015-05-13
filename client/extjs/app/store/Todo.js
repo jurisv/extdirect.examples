@@ -7,7 +7,7 @@ Ext.define('Demo.store.Todo', {
 
     model: 'Demo.model.TodoItem',
 
-    autoLoad: true,
+    autoLoad: false, // important to set autoLoad to false. If there is an error on the backend, Ext will still try to resolve Direct method names and crash the app.
 
     remoteSort: true, //enable remote filter
 

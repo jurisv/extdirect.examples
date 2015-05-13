@@ -32,5 +32,15 @@ Ext.define('Demo.Application', {
     stores: [
         'Todo',
         'Tree'
-    ]
+    ],
+
+    launch: function(){
+        if(Demo.DirectError){
+             Ext.Msg.alert('Error', Demo.DirectError.message);
+        } else {
+            //Note that we have removed autoCreateViewport property from app.js and instantiate it here.
+            //This allows us to block application execution if Direct backend is not available to serve the requests.
+            Ext.create('Demo.view.Viewport');
+        }
+    }
 });
