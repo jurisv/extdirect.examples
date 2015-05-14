@@ -12,6 +12,6 @@
     "relativeUrl": false,
     "appendRequestResponseObjects": true,
     "enableMetadata": true,
-    "databaseAutoConnection": true,
-    "responseHelper": true
+    "responseHelper": true,
+    "enableProcessors": true
 }
