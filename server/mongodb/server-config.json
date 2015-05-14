@@ -9,9 +9,9 @@
     "sessionSecret": "u4tgpuq4h5",
     "enableCORS": true,
     "AccessControl": {
-        "AllowOrigin": "*",
+        "AllowOrigin": "http://git",
         "AllowMethods": "GET,PUT,POST,DELETE,OPTIONS",
-        "AllowHeaders": "Origin, X-Requested-With, Content-Type, Accept",
+        "AllowHeaders": "Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Length",
         "AllowCredentials": true,
         "MaxAge": 3600
     }

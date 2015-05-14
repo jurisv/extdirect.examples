@@ -16,7 +16,7 @@ var Form = {
             data: {
                 firstname: 'John',
                 lastname: 'Smith',
-                email: 'john.smith@comapny.info'
+                email: 'john.smith@company.info'
             }
         });
     },

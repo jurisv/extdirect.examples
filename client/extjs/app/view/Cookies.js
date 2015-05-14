@@ -3,7 +3,7 @@ Ext.define('Demo.view.Cookies',{
 
     xtype: 'demo-cookies',
 
-    title: 'Cookies',
+    title: 'Authentication and Cookies',
 
     border: false,
 
@@ -16,10 +16,9 @@ Ext.define('Demo.view.Cookies',{
             items: [
                 {
                     xtype: 'button',
-                    formBind: true,
-                    text: 'Authentificate using credentials below',
+                    text: 'Check Authentication status',
                     handler: function(bt) {
-                        Server.Auth.Login.authenticate(bt.up('demo-cookies').getValues(),
+                        Server.Auth.Login.checkLogin(bt.up('demo-cookies').getValues(),
                             function(result, event) {
                                 // you can grab useful info from event
                                 var transaction = event.getTransaction(),
@@ -29,8 +28,23 @@ Ext.define('Demo.view.Cookies',{
                                 Ext.Msg.alert('Response', Ext.encode(result));
                             }
                         );
-                    },
-                    scope: this
+                    }
+                },
+                {
+                    xtype: 'button',
+                    text: 'Logout',
+                    handler: function(bt) {
+                        Server.Auth.Login.logout(bt.up('demo-cookies').getValues(),
+                            function(result, event) {
+                                // you can grab useful info from event
+                                var transaction = event.getTransaction(),
+                                    status = event.status;
+
+                                console.log(event.result);
+                                Ext.Msg.alert('Response', Ext.encode(result));
+                            }
+                        );
+                    }
                 }
             ]
         }
@@ -52,9 +66,26 @@ Ext.define('Demo.view.Cookies',{
             fieldLabel: 'Password'
         },
         {
+            xtype: 'button',
+            formBind: true,
+            text: 'Login',
+            handler: function(bt) {
+                Server.Auth.Login.login(bt.up('demo-cookies').getValues(),
+                    function(result, event) {
+                        // you can grab useful info from event
+                        var transaction = event.getTransaction(),
+                            status = event.status;
+
+                        console.log(event.result);
+                        Ext.Msg.alert('Response', Ext.encode(result));
+                    }
+                );
+            }
+        },
+        {
             xtype: 'component',
             margin: '20 0 0 0',
-            html: 'Note: Please enter username and password before submitting the form'
+            html: 'Note: Please enter username and password before submitting the form, Use "demo" for username/password. <br>Play with "Check Authentication status". It should change the response based on the actual status'
         }
     ]
 });

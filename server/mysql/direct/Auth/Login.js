@@ -5,34 +5,61 @@ var Login  = {
      * @param params object with received parameters
      * @param callback callback function to call at the end of current method
      * @param sessionID - current session ID if "enableSessions" set to true, otherwise null
-     * @param request only if "appendRequestResponseObjects" enabled
-     * @param response only if "appendRequestResponseObjects" enabled
+     * @param req only if "appendRequestResponseObjects" enabled
+     * @param res only if "appendRequestResponseObjects" enabled
      */
-    authenticate: function(params, callback, sessionID, request, response){
+    login: function(params, callback, sessionID, req, res){
         var username = params.username,
             password = params.password;
 
-        //console.log(sessionID);
-        //console.log(request);
-        //console.log(response);
+        // console.log(sessionID);
+        // console.log(req);
+        // console.log(res);
 
         /*
          You have full access to all request properties
          */
-        //console.log(request.session); //e.g. retrieve session data
+        //console.log(req.session);
 
-
-        response.header('My-Custom-Header ', '1234567890');
+        //response.header('My-Auth-Header', '1234567890');
         /*
          Some code here to check login
          */
+
+        if(username === 'demo' && password === 'demo'){
+            //store some data in session server-side
+            req.session.authenticated = true;
+
+            callback(null, {
+                message: 'Login successful',
+                success: true, // optional
+                data: {
+                    firstName: 'Direct',
+                    lastName: 'Demo',
+                    cookie: req.session.cookie // demo only. Typically you won't send this to the client.
+                }
+            });
+        } else {
+            req.session.authenticated = false;
+
+            callback(null, {
+                message: 'Login failed',
+                success: false
+            });
+        }
+    },
+
+    logout: function(params, callback, sessionID, req, res){
+        req.session.authenticated = false;
+
         callback(null, {
-            message: 'Login successful',
-            data: {
-                firstName: 'Juris',
-                lastName: 'Vecvanags',
-                cookie: request.session.cookie
-            }
+            message: 'Logout successful'
+        });
+    },
+
+    checkLogin: function(params, callback, sessionID, req, res) {
+        callback(null, {
+            message: req.session.authenticated ? 'Access granted' : 'Access denied'
         });
     }
 };
