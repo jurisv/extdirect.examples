@@ -18,7 +18,8 @@ Ext.define('Demo.Application', {
         'GridActions',
         'FormUpload',
         'TreeActions',
-        'Cookies'
+        'Cookies',
+        'Metadata'
     ],
 
     controllers: [

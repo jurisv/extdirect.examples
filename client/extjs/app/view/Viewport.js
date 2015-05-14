@@ -15,6 +15,10 @@ Ext.define('Demo.view.Viewport', {
                 xtype:'demo-cookies'
             },
             {
+                xtype:'grid-metadata',
+                disabled: true
+            },
+            {
                 xtype:'grid-actions',
                 disabled: true
             },
@@ -34,7 +38,6 @@ Ext.define('Demo.view.Viewport', {
                 xtype:'tree-actions',
                 disabled: true
             }
-
         ]
     }]
 });
