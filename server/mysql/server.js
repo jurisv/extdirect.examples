@@ -17,7 +17,7 @@ var express = require('express'),
 var favicon = require('serve-favicon'),
     logger = require('morgan'),
     methodOverride = require('method-override'),
-    cookieParser = require('cookie-parser'),
+    //cookieParser = require('cookie-parser'),
     compression = require('compression'),
     session = require('express-session'),
     bodyParser = require('body-parser'),
@@ -36,7 +36,7 @@ app.use(logger(serverConfig.logger));
 app.use(methodOverride());
 
 if(serverConfig.enableSessions) {
-    app.use(cookieParser());
+   // app.use(cookieParser());
     app.use(session({
         resave: false,
         saveUninitialized: true,
