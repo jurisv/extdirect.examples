@@ -1,4 +1,7 @@
 var Form = {
+
+    role: 'admin',
+
     testMe: function(params, callback) {
         callback(null, {
             randomNumber: 20,

@@ -32,6 +32,7 @@ var Login  = {
 
             callback(null, {
                 message: 'Login successful',
+                auth: true,
                 success: true, // optional
                 data: {
                     firstName: 'Direct',
@@ -53,12 +54,14 @@ var Login  = {
         req.session.authenticated = false;
 
         callback(null, {
+            auth: false,
             message: 'Logout successful'
         });
     },
 
     checkLogin: function(params, callback, sessionID, req, res) {
         callback(null, {
+            auth: req.session.authenticated,
             message: req.session.authenticated ? 'Access granted' : 'Access denied'
         });
     }

@@ -12,23 +12,29 @@ Ext.define('Demo.view.Viewport', {
         xtype: 'tabpanel',
         items: [
             {
-                xtype:'grid-actions'
-            },
-            {
-                xtype:'method-call'
-            },
-            {
-                xtype:'form-actions'
-            },
-            {
-                xtype:'form-upload'
-            },
-            {
-                xtype:'tree-actions'
-            },
-            {
                 xtype:'demo-cookies'
+            },
+            {
+                xtype:'grid-actions',
+                disabled: true
+            },
+            {
+                xtype:'method-call',
+                disabled: true
+            },
+            {
+                xtype:'form-actions',
+                disabled: true
+            },
+            {
+                xtype:'form-upload',
+                disabled: true
+            },
+            {
+                xtype:'tree-actions',
+                disabled: true
             }
+
         ]
     }]
 });

@@ -36,11 +36,26 @@ Ext.define('Demo.Application', {
 
     launch: function(){
         if(Demo.DirectError){
-             Ext.Msg.alert('Error', Demo.DirectError.message);
+            Ext.Msg.alert('Error', Demo.DirectError.message);
         } else {
             //Note that we have removed autoCreateViewport property from app.js and instantiate it here.
             //This allows us to block application execution if Direct backend is not available to serve the requests.
-            Ext.create('Demo.view.Viewport');
+            var viewport = Ext.create('Demo.view.Viewport');
+
+            //Let's check if we are logged in
+
+            Server.Auth.Login.checkLogin({},
+                function(result, event) {
+                    var tabs = viewport.down('tabpanel').items.items;
+
+                    if(result.auth) {
+                        // enable other tabs
+                        Ext.each(tabs, function(cmp){
+                            cmp.enable();
+                        });
+                    }
+                }
+            );
         }
     }
 });
