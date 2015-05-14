@@ -22,6 +22,9 @@ function MySQL(config) {
             }
         });
 
+        //add alias for debug
+        this.connection.debug = this.debug;
+
         return this.connection;
     };
 
@@ -52,4 +55,3 @@ function MySQL(config) {
 }
 
 global.App.database = new MySQL(cfg);
-//TODO: Router param: autoConnect . Will open db connection at the beginning of batch and close once it's done with all requests

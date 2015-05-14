@@ -1,16 +1,17 @@
 var table = 'todoitem';
-var db = global.App.database;
+var db = global.App.database.connection;
 
 var Todo  = {
     create: function(params, callback){
-        var conn = db.connect();
         delete params['id'];
-        conn.query('INSERT INTO ' + table + ' SET ?', params, function(err, result) {
+        db.query('INSERT INTO ' + table + ' SET ?', params, function(err, result) {
 
-            if (err) db.debug(err, callback);
+            if (err) {
+                db.debug(err, callback);
+                return false;
+            }
 
-            conn.query('SELECT * FROM '  + table + ' WHERE id = ?', result.insertId, function(err, rows, fields) {
-                db.disconnect(conn); //release connection
+            db.query('SELECT * FROM '  + table + ' WHERE id = ?', result.insertId, function(err, rows, fields) {
                 callback(null, {
                     data: rows[0]
                 });
@@ -20,8 +21,6 @@ var Todo  = {
 
     //callback as last argument is mandatory
     read: function(params, callback){
-        var conn = db.connect();
-
         var sql = 'SELECT * FROM ' + table,
             where = '';
 
@@ -35,22 +34,27 @@ var Todo  = {
         // this sample implementation supports 1 sorter, to have more than one, you have to loop and alter query
         if(params.sort){
             var s = params.sort[0];
-            sql = sql + ' ORDER BY ' + conn.escape(s.property) +  ' ' + conn.escape(s.direction);
+            sql = sql + ' ORDER BY ' + db.escape(s.property) +  ' ' + db.escape(s.direction);
         }
 
         // Paging
-        sql = sql + ' LIMIT ' + conn.escape(params.start) + ' , ' + conn.escape(params.limit);
+        sql = sql + ' LIMIT ' + db.escape(params.start) + ' , ' + db.escape(params.limit);
 
-        conn.query(sql, function(err, rows, fields) {
-            if (err) db.debug(err, callback);
+        db.query(sql, function(err, rows, fields) {
+            if (err) {
+                db.debug(err, callback);
+                return false;
+            }
 
             //get totals for paging
 
             var totalQuery = 'SELECT count(*) as totals from ' + table + where;
 
-            conn.query(totalQuery, function(err, rowsTotal, fields) {
-                db.disconnect(conn); //release connection
-                if (err) db.debug(err, callback);
+            db.query(totalQuery, function(err, rowsTotal, fields) {
+                if (err) {
+                    db.debug(err, callback);
+                    return false;
+                }
 
                 callback(null, {
                     data: rows,
@@ -61,24 +65,23 @@ var Todo  = {
     },
 
     update: function(params, callback){
-        var conn = db.connect();
-
-        conn.query('UPDATE ' + table + ' SET ? where id = ' + conn.escape(params['id']), params, function(err, result) {
-            if (err) db.debug(err, callback);
-
-            db.disconnect(conn); //release connection
+        db.query('UPDATE ' + table + ' SET ? where id = ' + db.escape(params['id']), params, function(err, result) {
+            if (err) {
+                db.debug(err, callback);
+                return false;
+            }
 
             callback();
         });
     },
 
     destroy: function(params, callback){
-        var conn = db.connect();
+        db.query('DELETE FROM ' + table + ' WHERE id = ?', db.escape(params['id']), function(err, rows, fields) {
+            if (err) {
+                db.debug(err, callback);
+                return false;
+            }
 
-        conn.query('DELETE FROM ' + table + ' WHERE id = ?', conn.escape(params['id']), function(err, rows, fields) {
-            if (err) db.debug(err, callback);
-
-            db.disconnect(conn); //release connection
             callback(null, {
                 success:rows.affectedRows === 1, //if row successfully removed, affected row will be equal to 1
                 id:params['id']

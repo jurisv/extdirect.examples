@@ -1,19 +1,25 @@
 var RouterProcessor  = {
 
-    beforeAction: function(action, method, req, res, callback) {
+    beforeTransaction: function(req, res, callback) {
+        //Implement any logic that should be carried prior to execution
+        //Example: open database connection
+        //console.log('before');
 
+        var appDB = global.App.database;
+
+        appDB.connect();
+
+        callback();
     },
 
-    afterAction: function(action, method, req, res, callback) {
+    afterTransaction: function(req, res, batch, callback) {
+        //Implement any logic that should be carried after to execution
+        //Example: close database connection
+        //console.log('after', batch);
 
-    },
+        global.App.database.disconnect(); //release connection
 
-    beforeTransaction: function(action, method, req, res, callback) {
-
-    },
-
-    afterTransaction: function(action, method, req, res, callback) {
-
+        callback(null, batch);
     }
 };
 
