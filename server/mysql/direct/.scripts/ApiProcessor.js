@@ -32,6 +32,11 @@ var ApiProcessor  = {
      * @param callback
      */
     afterApi: function(api, callback) {
+
+        //You can tweak API here, for example remove something
+        //delete api.actions.MultiTable;
+
+        //console.log(api);
         callback(null, api);
     }
 };
