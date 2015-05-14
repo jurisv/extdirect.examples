@@ -15,7 +15,7 @@ Important: Curently v2 is in experimental state and thus not pushed to npmjs rep
 https://github.com/jurisv/nodejs.extdirect
 
 I will also add some more tweaks to examples regarding callback format as well as around database connection.
-There is no exact timeframe, but should land around ExtJS 6 release or earlier.
+There is no exact time frame, but should land around ExtJS 6 release or earlier.
 
 ### Known issues
 MongoDB direct methods are WIP
