@@ -1,4 +1,7 @@
 var Form = {
+
+    role: 'admin',
+
     testMe: function(params, callback) {
         callback(null, {
             randomNumber: 20,
@@ -16,7 +19,7 @@ var Form = {
             data: {
                 firstname: 'John',
                 lastname: 'Smith',
-                email: 'john.smith@comapny.info'
+                email: 'john.smith@company.info'
             }
         });
     },

@@ -19,11 +19,11 @@ You have to run matching ExtJs/Touch application to see it in action.
     * Folder 'direct' contains all Direct classes
     * Folder 'uploads' is required if you have intentions of uploading any files via the server.
     * server-config.json - config variables for the server
+    * direct-config.json - config variables for the direct connector
     * db-config.json - config variables for the database
-    * db-config.json - config variables for MySQL server
     * server.js - Main server file
-    * server-db.js - Database part implementation. If you want to implement different type of database, make any changes to this file
-    * data.sql - initial dataset
+    * server-db.js - Database helper to handle connection. If you want to implement different type of database, make any changes to this file
+    * todoitem.json - initial dataset
 
 
 ###MongoDb quickstart
@@ -65,7 +65,7 @@ fields: [
 
 ###MongoDb Authentification
 
-This guide is valid for MongoDB version 2.6+. Please verify your version and upgrade as necessary.
+This guide is valid for MongoDB version 3.x+. Please verify your version and upgrade as necessary.
 
 By default MongDb does not require any sort of authentification. With that in mind everyone has access to your database.
 While it might seem okay for development purposes, it would be a great idea to enable one of the authentification methods to disable such an access.
@@ -142,3 +142,12 @@ If you wouldl like to connect to MongoLab db you can use this config as a refere
     "breakOnError": true
 }
 ```
+
+##Lessons learned
+ * If you just installed the database, it does not have any users.
+   You have to start the server with --noauth parameter
+ * If you are getting this error: [initandlisten] exception in initAndListen: 98 Unable to create/open lock file: /data/db/mongod.lock errno:13 Permission denied Is a mongod instance already running?,
+ Most likely you did not change permissions for /data/db folder
+
+ * Then follow steps outlined here: http://docs.mongodb.org/manual/tutorial/add-user-administrator/
+

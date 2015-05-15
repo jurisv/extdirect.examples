@@ -3,20 +3,22 @@ var mongoDB = global.App.database;
 
 var Todo  = {
     create: function(params, callback) {
-        mongoDB.execute(function(collection){
-                collection.insert(params, {w:1}, function(err, result) {
-                    if (err) {
-                        mongoDB.debugError(err, callback);
-                    }else{
+        mongoDB.connect(function(err, db) {
+            // Get the documents collection
+            var collection = db.collection(collectionName);
 
-                        mongoDB.close();
-                        callback(null, {
-                            data: result
-                        });
-                    }
-                });
-            }, collectionName
-        );
+            collection.insertOne(params, {w:1}, function(err, result) {
+                if (err) {
+                    mongoDB.debug(err, callback);
+                } else {
+
+                    db.close();
+                    callback(null, {
+                        data: result.ops[0]
+                    });
+                }
+            });
+        } );
     },
 
     read: function(params, callback){
@@ -50,74 +52,75 @@ var Todo  = {
         }
 
         //Filtering in mongoDb is done via RegExp, so you can pass values as valid expression
-        if(params.filter){
-            for(i = 0; i < params.filter.length; i++){
+        if(params.filter) {
+            for(i = 0; i < params.filter.length; i++) {
                 filter[params.filter[i].property] = new RegExp(params.filter[i].value);
             }
-
         }
 
-        mongoDB.execute(function(collection){
-                collection.count(filter, function(err, count) {
-                    if (err) {
-                        mongoDB.debugError(err, callback);
+        mongoDB.connect(function(err, db) {
+            // Get the documents collection
+            var collection = db.collection(collectionName);
+
+            collection.count(filter, function(err, count) {
+                if (err) {
+                    mongoDB.debug(err, callback);
+                }else{
+                    if(count === 0){
+                        if (err) {
+                            mongoDB.debug(err, callback);
+                        }else{
+                            db.close();
+                            callback(null, response);
+                        }
                     }else{
-                        if(count === 0){
+                        collection.find(filter, options).toArray(function(err, docs) {
                             if (err) {
-                                mongoDB.debugError(err, callback);
+                                mongoDB.debug(err, callback);
                             }else{
-                                mongoDB.close();
+                                db.close();
+                                response.data = docs;
+                                response.total = count;
                                 callback(null, response);
                             }
-                        }else{
-                            collection.find(filter, options).toArray(function(err, docs) {
-                                if (err) {
-                                    mongoDB.debugError(err, callback);
-                                }else{
-                                    mongoDB.close();
-                                    response.data = docs;
-                                    response.total = count;
-                                    callback(null, response);
-                                }
-                            });
-                        }
+                        });
                     }
-                });
-            }, collectionName
-        );
+                }
+            });
+        });
     },
 
-    update: function(params, callback){
-        mongoDB.execute(function(collection){
-                collection.update({_id: mongoDB.getId(params.id)}, params, {upsert: true, w: 1}, function(err, result) {
-                    if (err) {
-                        mongoDB.debugError(err, callback);
-                    }else{
+    update: function(params, callback) {
+        mongoDB.connect(function(err, db) {
+            var collection = db.collection(collectionName);
 
-                        mongoDB.close();
-                        callback();
-                    }
-                });
-            }, collectionName
-        );
+            collection.updateOne({_id: mongoDB.getId(params.id)}, params, {upsert: true, w: 1}, function(err, result) {
+                if (err) {
+                    mongoDB.debug(err, callback);
+                } else {
+                    db.close();
+                    callback();
+                }
+            });
+        });
     },
 
     destroy: function(params, callback){
-        mongoDB.execute(function(collection){
-                collection.remove({_id: mongoDB.getId(params.id)}, {w:1}, function(err, numberOfRemovedDocs) {
-                    if (err) {
-                        mongoDB.debugError(err, callback);
-                    }else{
+        mongoDB.connect(function(err, db) {
+            var collection = db.collection(collectionName);
 
-                        mongoDB.close();
-                        callback(null, {
-                            success: numberOfRemovedDocs === 1,
-                            id: params.id
-                        });
-                    }
-                });
-            }, collectionName
-        );
+            collection.removeOne({_id: mongoDB.getId(params.id)}, {w:1}, function(err, result) {
+                if (err) {
+                    mongoDB.debug(err, callback);
+                } else {
+                    db.close();
+                    callback(null, {
+                        success: result.deletedCount === 1,
+                        id: params.id
+                    });
+                }
+            });
+        });
     }
 };
 

@@ -6,6 +6,5 @@
     "authMechanism": "MONGODB-CR",
     "username": "script",
     "password": "123456",
-    "autoReconnect" : true,
-    "breakOnError": true
+    "autoReconnect" : true
 }
