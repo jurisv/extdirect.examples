@@ -10,6 +10,10 @@ var Form = {
         });
     },
 
+    testFalse: function(params, callback) {
+        callback(null, false);
+    },
+
     testException: function(params, callback) {
         throw {message: 'Error captured'};
     },
