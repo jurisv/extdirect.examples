@@ -8,6 +8,10 @@ Ext.define('Demo.Application', {
 
     name: 'Demo',
 
+    requires:[
+        'Ext.direct.*', 'Ext.data.proxy.Direct'
+    ],
+    
     views: [
         'MethodCall',
         'FormActions',
@@ -45,34 +49,29 @@ Ext.define('Demo.Application', {
             // Check for unexpected problems
             // Node backend will set error object
             if(ns.error){
-                //This is handled later in Application launch method
-                Demo.DirectError = ns.error;
+                Ext.Msg.alert('Error', ns.error.message);
             } else {
                 Ext.direct.Manager.addProvider(ns);
+
+                var viewport = Ext.create('Demo.view.Viewport');
+
+                //Let's check if we are logged in
+
+                Server.Auth.Login.checkLogin({},
+                    function(result, event) {
+                        var tabs = viewport.down('tabpanel').items.items;
+
+                        if(result.auth) {
+                            // enable other tabs
+                            Ext.each(tabs, function(cmp){
+                                cmp.enable();
+                            });
+                        }
+                    }
+                );
+
             }
         }
 
-        if(Demo.DirectError){
-            Ext.Msg.alert('Error', Demo.DirectError.message);
-        } else {
-            //Note that we have removed autoCreateViewport property from app.js and instantiate it here.
-            //This allows us to block application execution if Direct backend is not available to serve the requests.
-            var viewport = Ext.create('Demo.view.Viewport');
-
-            //Let's check if we are logged in
-
-            Server.Auth.Login.checkLogin({},
-                function(result, event) {
-                    var tabs = viewport.down('tabpanel').items.items;
-
-                    if(result.auth) {
-                        // enable other tabs
-                        Ext.each(tabs, function(cmp){
-                            cmp.enable();
-                        });
-                    }
-                }
-            );
-        }
     }
 });
