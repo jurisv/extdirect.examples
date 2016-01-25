@@ -9,9 +9,9 @@ Ext.define('Demo.Application', {
     name: 'Demo',
 
     requires:[
-        'Demo.DirectAPI'
+        'Ext.direct.*', 'Ext.data.proxy.Direct'
     ],
-
+    
     views: [
         'MethodCall',
         'FormActions',
@@ -36,27 +36,42 @@ Ext.define('Demo.Application', {
     ],
 
     launch: function(){
-        if(Demo.DirectError){
-            Ext.Msg.alert('Error', Demo.DirectError.message);
-        } else {
-            //Note that we have removed autoCreateViewport property from app.js and instantiate it here.
-            //This allows us to block application execution if Direct backend is not available to serve the requests.
-            var viewport = Ext.create('Demo.view.Viewport');
 
-            //Let's check if we are logged in
+        var ns = Server.API;
 
-            Server.Auth.Login.checkLogin({},
-                function(result, event) {
-                    var tabs = viewport.down('tabpanel').items.items;
+        /*
+         Add provider. Name must match settings on serverside
+         */
 
-                    if(result.auth) {
-                        // enable other tabs
-                        Ext.each(tabs, function(cmp){
-                            cmp.enable();
-                        });
+        //Custom implementation. Works only with node backend and extdirect connector v2
+        //This feature is part ApiProcessor implementation
+        if(ns){
+            // Check for unexpected problems
+            // Node backend will set error object
+            if(ns.error){
+                Ext.Msg.alert('Error', ns.error.message);
+            } else {
+                Ext.direct.Manager.addProvider(ns);
+
+                var viewport = Ext.create('Demo.view.Viewport');
+
+                //Let's check if we are logged in
+
+                Server.Auth.Login.checkLogin({},
+                    function(result, event) {
+                        var tabs = viewport.down('tabpanel').items.items;
+
+                        if(result.auth) {
+                            // enable other tabs
+                            Ext.each(tabs, function(cmp){
+                                cmp.enable();
+                            });
+                        }
                     }
-                }
-            );
+                );
+
+            }
         }
+
     }
 });

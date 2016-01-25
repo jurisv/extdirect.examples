@@ -107,6 +107,10 @@
         {
             "path": "app.js",
             "bundle": true
+        },
+        {
+            "path": "/directapi",
+            "remote": true
         }
     ],
 
