@@ -1,8 +1,6 @@
 ## Important!
 This repository contains legacy implementation for Sencha Touch, Ext JS versions 4 and 5.
-For newer example on how to use using ext.direct connector, please refer to the following repositories:
-
-https://github.com/jurisv/extdirect-examples-6.5
+For newer example on how to use using ext.direct connector, please refer to the following repository:
 
 https://github.com/sencha-extjs-examples/Coworkee
 
