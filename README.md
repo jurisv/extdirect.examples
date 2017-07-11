@@ -1,4 +1,4 @@
-##Important!
+## Important!
 This repository contains legacy implementation for Sencha Touch, Ext JS versions 4 and 5.
 For newer example on how to use using ext.direct connector, please refer to the following repositories:
 
